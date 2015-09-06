@@ -1,0 +1,17 @@
+/* Mixins */
+.animate(@seconds) {
+  -webkit-transition: @seconds;
+  -o-transition: @seconds;
+  transition: @seconds;
+}
+.text-hide() {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.border-radius(@radius) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
