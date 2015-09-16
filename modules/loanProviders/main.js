@@ -10,7 +10,7 @@ module.exports = {
    */
   filarum: function(data, done) {
     Filarum.handleDataCrawl(data, function(compareData) {
-
+      done(compareData);
     });
   },
 

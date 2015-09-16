@@ -26,8 +26,13 @@ module.exports = {
       }
     }, function(error, browser) {
       browser.createPage(function(err, page) {
+        if (err) {
+          done(false);
+          return false;
+        }
         $this.crawlPageData(page, data, function(providerData) {
-          console.log(providerData);
+          providerData.loanProvider = 'Filarum';
+          done(providerData);
           browser.exit();
         });
       });

@@ -8,7 +8,7 @@ module.exports = {
       'title': 'Contact'
     },
   },
-  loanProviders: ['filarum', 'netcredit'],
+  loanProviders: ['filarum'],
   jQueryURL: 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
   crawler: {
     'userAgents': [

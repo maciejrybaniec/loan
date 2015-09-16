@@ -27,13 +27,10 @@ Comparison.prototype = {
         return false;
       }
 
-      $this.getLoanConditions(req.body, function() {
-
+      $this.getLoanConditions(req.body, function(comparisonData) {
+        res.status(200);
+        res.json(comparisonData);
       });
-
-      res.status(200);
-      res.json({});
-
     });
   },
   /**
@@ -100,8 +97,21 @@ Comparison.prototype = {
    * @method getLoanConditions
    */
   getLoanConditions: function(data, callback) {
+    var iterator = 0,
+      crawlerDataArray = [],
+      providersLength = config.loanProviders.length;
+
     config.loanProviders.forEach(function(provider) {
-      providerHandler[provider](data);
+      providerHandler[provider](data, function(crawlerData) {
+        if (crawlerData !== false) {
+          crawlerDataArray.push(crawlerData);
+        }
+        iterator++;
+
+        if (iterator === providersLength) {
+          callback(crawlerDataArray);
+        }
+      });
     });
   },
 }
