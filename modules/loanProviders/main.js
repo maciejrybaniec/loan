@@ -5,11 +5,13 @@ var Filarum = require('./filarum');
 module.exports = {
   /**
    * Handle filarum provider
-   * @param {object} [arguments] request arguments
+   * @param {object} [data] request arguments
    * @method filarum
    */
-  filarum: function(arguments) {
-    Filarum.handleDataCrawl();
+  filarum: function(data, done) {
+    Filarum.handleDataCrawl(data, function(compareData) {
+
+    });
   },
 
   /**

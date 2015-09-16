@@ -11,10 +11,12 @@ var website = 'https://www.filarum.pl';
 module.exports = {
   /**
    * Create phantom instance for provider
-   * @param {object} [arguments] request arguments
+   * @param {object} [data] request arguments
+   * @param {function} [done] callback function
    * @method handleDataCrawl
    */
-  handleDataCrawl: function(arguments) {
+  handleDataCrawl: function(data, done) {
+
     var $this = this;
     /* Create phantom instance */
     driver.create({
@@ -24,49 +26,119 @@ module.exports = {
       }
     }, function(error, browser) {
       browser.createPage(function(err, page) {
-        $this.crawlPageData(page, function(data) {
-
+        $this.crawlPageData(page, data, function(providerData) {
+          console.log(providerData);
+          browser.exit();
         });
       });
     });
   },
   /**
+   * Checks max length of days calculator moves
+   * @param {object} [searchData] compare arguments
+   * @method createEvaluateArguments
+   */
+  createEvaluateArguments: function(searchData) {
+    var maxBorrowAmount = config.loanProvidersSettings.filarum.maxPrice,
+      amountStart = Number;
+    evaluateObject = {
+      firstTimeBorrow: false,
+      amountElement: '#amountPlus',
+      timeElement: '#periodPlus',
+      timeClick: 0,
+    };
+
+    /* First time borrow */
+    if (JSON.parse(searchData.firstTimeBorrow) === true) {
+      evaluateObject.firstTimeBorrow = true;
+      maxBorrowAmount = 1000;
+    }
+
+    /* Price amount */
+    if (parseInt(searchData.amount) >= maxBorrowAmount) {
+      evaluateObject.amountClick = (maxBorrowAmount - config.loanProvidersSettings.filarum.startPrice) / 50;
+    } else {
+      amountStart = parseInt(searchData.amount) - config.loanProvidersSettings.filarum.startPrice;
+      if (amountStart < 0) {
+        evaluateObject.amountElement = '#amountMinus';
+      }
+      evaluateObject.amountClick = Math.abs(amountStart / 50);
+    }
+
+    /* Date amount */
+    if (parseInt(searchData.time) < config.loanProvidersSettings.filarum.maxDays) {
+      evaluateObject.timeClick = config.loanProvidersSettings.filarum.maxDays - searchData.time;
+      evaluateObject.timeElement = '#periodMinus';
+    }
+
+    return evaluateObject;
+  },
+  /**
    * Create phantom instance for provider
    * @param {object} [page] phantom page object
+   * @param {object} [searchData] compare arguments
    * @param {function} [done] callback function
    * @method crawlPageData
    */
-  crawlPageData: function(page, done) {
-    page.set('settings.userAgent', common.randomUserAgent, function() {
-      page.open(website, function(error, status) {
-        if (status === 'fail') {
-          errorHandler.logError('provider', website);
-          done(false);
-          return false;
-        }
+  crawlPageData: function(page, searchData, done) {
+    var $this = this;
 
-        page.includeJs(config.jQueryURL, function(error) {
+    page.set('settings', {
+      'userAgent': common.randomUserAgent(),
+      'javascriptEnabled': true,
+      'loadImages': false,
+    }, function() {
+
+      page.onConsoleMessage = function(msg) {
+        console.log(msg);
+      };
+
+      page.onInitialized = function() {
+        page.evaluate(function(domContentLoadedMsg) {
+          document.addEventListener('DOMContentLoaded', function() {}, false);
+        }, page.onDOMContentLoaded);
+      };
+
+      /* Called when DOM is ready */
+      page.onDOMContentLoaded = function() {
+        var evaluateArguments = $this.createEvaluateArguments(searchData);
+
+        page.evaluate(function(args) {
+          var pageArguments = JSON.parse(args);
+
+          if (pageArguments.firstTimeBorrow === false) {
+            $('.loanTypeList li:nth-child(2)').trigger('click');
+          }
+
+          /* Calculate amount */
+          for (i = 0, amountIteration = pageArguments.amountClick; i < amountIteration; i++) {
+            $(pageArguments.amountElement).trigger('click');
+          }
+
+          /* Calculate peroid */
+          for (j = 0, timeIteration = pageArguments.timeClick; j < timeIteration; j++) {
+            $(pageArguments.timeElement).trigger('click');
+          }
+
+          return {
+            'amount': $('#loanAmount-label').text(),
+            'paymentDate': $('#paymentDate-label').text(),
+            'commission': $('#commissionAmount-label').text(),
+            'total': $('#total-label').text(),
+            'rrso': $('#rrso-label').text(),
+          };
+
+        }, JSON.stringify(evaluateArguments), function(error, crawlerData) {
           if (error) {
-            errorHandler.logError('provider', website);
             done(false);
             return false;
           }
 
-          page.evaluate(function() {
-
-            $('#amountPlus').trigger('click');
-
-            var a = $('#loanAmount-label').text();
-            return {
-              a: a,
-            }
-
-          }, function(error, result) {
-            console.log(result);
-
-          });
+          done(crawlerData);
         });
-      });
+      };
+
+      page.open(website);
     });
   },
 };

@@ -10,7 +10,7 @@ module.exports = {
    */
   logError: function(errorType, message) {
     var errorData = this.setError(errorType, message);
-    fs.appendFile('erros.log', errorData + '\n');
+    fs.appendFile('errors.log', errorData + '\n');
   },
   /**
    * Set error type

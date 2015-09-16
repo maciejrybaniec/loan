@@ -27,7 +27,9 @@ Comparison.prototype = {
         return false;
       }
 
-      $this.getLoanConditions(req.body);
+      $this.getLoanConditions(req.body, function() {
+
+      });
 
       res.status(200);
       res.json({});
@@ -93,14 +95,15 @@ Comparison.prototype = {
 
   /**
    * Get loan conditions for each provider
-   * @param {object} [arguments] request arguments
+   * @param {object} [data] request arguments
+   * @param {function} [callback] callback function
    * @method getLoanConditions
    */
-   getLoanConditions: function(arguments) {
-     config.loanProviders.forEach(function(provider) {
-       providerHandler[provider]();
-     });
-   },
+  getLoanConditions: function(data, callback) {
+    config.loanProviders.forEach(function(provider) {
+      providerHandler[provider](data);
+    });
+  },
 }
 
 module.exports = Comparison;
