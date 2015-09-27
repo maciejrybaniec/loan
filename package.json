@@ -18,6 +18,13 @@
     "less-plugin-clean-css": "~1.5.1",
     "gulp-less": "~3.0.3",
     "node-phantom-simple": "~2.0.4",
-    "phantomjs": "~1.9.18"
+    "phantomjs": "~1.9.18",
+    "date-format-lite": "~0.7.4",
+    "accounting": "~0.4.1",
+    "request": "~2.62.0",
+    "moment": "~2.10.6"
+  },
+  "dependencies": {
+    "strings-parser-date": "~0.1.1"
   }
 }

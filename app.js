@@ -11,6 +11,7 @@ app.set('view engine', 'ejs');
 app.set('view cache', false);
 app.set('views', __dirname + '/views');
 
+
 /* APP Config */
 app.use(bodyParser.urlencoded({
   extended: true,
@@ -22,7 +23,7 @@ app.use(bodyParser.json({
    extended: true,
 }));
 
-app.use('/css', express.static(__dirname + '/css'));
+app.use('/', express.static(__dirname + '/public'));
 
 app.use('/', Router);
 app.listen(8000);

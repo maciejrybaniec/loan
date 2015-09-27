@@ -1,4 +1,4 @@
-/* Filarum provider */
+/* netcredit provider */
 var driver = require('node-phantom-simple'),
   phantomjs = require('phantomjs'),
   config = require('./../../config'),
@@ -6,7 +6,7 @@ var driver = require('node-phantom-simple'),
   errorHandler = require('./../error');
 
 /* Phantom website */
-var website = 'https://www.filarum.pl';
+var website = 'https://www.ekspreskasa.pl/';
 
 module.exports = {
   /**
@@ -31,7 +31,7 @@ module.exports = {
           return false;
         }
         $this.crawlPageData(page, data, function(providerData) {
-          providerData.loanProvider = 'filarum';
+          providerData.loanProvider = 'ekspreskasa';
           done(providerData);
           browser.exit();
         });
@@ -44,37 +44,32 @@ module.exports = {
    * @method createEvaluateArguments
    */
   createEvaluateArguments: function(searchData) {
-    var maxBorrowAmount = config.loanProvidersSettings.filarum.maxPrice,
+    var maxBorrowAmount = config.loanProvidersSettings.ekspreskasa.maxPrice,
       amountStart = Number;
     evaluateObject = {
       firstTimeBorrow: false,
-      amountElement: '#amountPlus',
-      timeElement: '#periodPlus',
       timeClick: 0,
     };
 
     /* First time borrow */
     if (JSON.parse(searchData.firstTimeBorrow) === true) {
       evaluateObject.firstTimeBorrow = true;
-      maxBorrowAmount = 1000;
+      maxBorrowAmount = 1500;
     }
 
     /* Price amount */
     if (parseInt(searchData.amount) >= maxBorrowAmount) {
-      evaluateObject.amountClick = (maxBorrowAmount - config.loanProvidersSettings.filarum.startPrice) / 50;
-    } else {
-      amountStart = parseInt(searchData.amount) - config.loanProvidersSettings.filarum.startPrice;
-      if (amountStart < 0) {
-        evaluateObject.amountElement = '#amountMinus';
+      if (evaluateObject.firstTimeBorrow) {
+        evaluateObject.amountClick = 14;
+      } else {
+        evaluateObject.amountClick = 19;
       }
-      evaluateObject.amountClick = Math.abs(amountStart / 50);
+    } else {
+      amountStart = Math.round(parseInt(searchData.amount) / 100) - 1;
+      evaluateObject.amountClick = amountStart;
     }
 
-    /* Date amount */
-    if (parseInt(searchData.time) < config.loanProvidersSettings.filarum.maxDays) {
-      evaluateObject.timeClick = config.loanProvidersSettings.filarum.maxDays - searchData.time;
-      evaluateObject.timeElement = '#periodMinus';
-    }
+    evaluateObject.timeClick = searchData.time;
 
     return evaluateObject;
   },
@@ -94,10 +89,6 @@ module.exports = {
       'loadImages': false,
     }, function() {
 
-      page.onConsoleMessage = function(msg) {
-        console.log(msg);
-      };
-
       page.onInitialized = function() {
         page.evaluate(function(domContentLoadedMsg) {
           document.addEventListener('DOMContentLoaded', function() {}, false);
@@ -112,25 +103,24 @@ module.exports = {
           var pageArguments = JSON.parse(args);
 
           if (pageArguments.firstTimeBorrow === false) {
-            $('.loanTypeList li:nth-child(2)').trigger('click');
+            jQuery('#tab2-link').click();
           }
 
-          /* Calculate amount */
-          for (i = 0, amountIteration = pageArguments.amountClick; i < amountIteration; i++) {
-            $(pageArguments.amountElement).trigger('click');
+          jQuery('#calc_slider_loan_amount').slider( 'option', 'value', pageArguments.amountClick);
+
+          if (pageArguments.timeClick <= 15) {
+            jQuery('#calc_button_loan_term_0').click();
+          } else {
+            jQuery('#calc_button_loan_term_1').click();
           }
 
-          /* Calculate peroid */
-          for (j = 0, timeIteration = pageArguments.timeClick; j < timeIteration; j++) {
-            $(pageArguments.timeElement).trigger('click');
-          }
 
           return {
-            'amount': $('#loanAmount-label').text(),
-            'paymentDate': $('#paymentDate-label').text(),
-            'commission': $('#commissionAmount-label').text(),
-            'total': $('#total-label').text(),
-            'rrso': $('#rrso-label').text(),
+            'amount': jQuery('#calc_output_loan_amount').text(),
+            'paymentDate': jQuery('#calc_output_loan_duedate').text(),
+            'commission': jQuery('#calc_output_loan_expenses').text(),
+            'total': jQuery('#calc_output_loan_total').text(),
+            'rrso': jQuery('#calc_output_loan_apr').text().replace('%', ' %'),
           };
 
         }, JSON.stringify(evaluateArguments), function(error, crawlerData) {
@@ -146,7 +136,6 @@ module.exports = {
           done(crawlerData);
         });
       };
-
       page.open(website);
     });
   },

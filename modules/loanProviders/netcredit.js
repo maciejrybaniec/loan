@@ -1,4 +1,4 @@
-/* Filarum provider */
+/* netcredit provider */
 var driver = require('node-phantom-simple'),
   phantomjs = require('phantomjs'),
   config = require('./../../config'),
@@ -6,7 +6,7 @@ var driver = require('node-phantom-simple'),
   errorHandler = require('./../error');
 
 /* Phantom website */
-var website = 'https://www.filarum.pl';
+var website = 'https://www.netcredit.pl/';
 
 module.exports = {
   /**
@@ -31,7 +31,7 @@ module.exports = {
           return false;
         }
         $this.crawlPageData(page, data, function(providerData) {
-          providerData.loanProvider = 'filarum';
+          providerData.loanProvider = 'netcredit';
           done(providerData);
           browser.exit();
         });
@@ -44,37 +44,32 @@ module.exports = {
    * @method createEvaluateArguments
    */
   createEvaluateArguments: function(searchData) {
-    var maxBorrowAmount = config.loanProvidersSettings.filarum.maxPrice,
+    var maxBorrowAmount = config.loanProvidersSettings.netcredit.maxPrice,
       amountStart = Number;
     evaluateObject = {
       firstTimeBorrow: false,
-      amountElement: '#amountPlus',
-      timeElement: '#periodPlus',
       timeClick: 0,
     };
 
     /* First time borrow */
     if (JSON.parse(searchData.firstTimeBorrow) === true) {
       evaluateObject.firstTimeBorrow = true;
-      maxBorrowAmount = 1000;
+      maxBorrowAmount = 1500;
     }
 
     /* Price amount */
     if (parseInt(searchData.amount) >= maxBorrowAmount) {
-      evaluateObject.amountClick = (maxBorrowAmount - config.loanProvidersSettings.filarum.startPrice) / 50;
-    } else {
-      amountStart = parseInt(searchData.amount) - config.loanProvidersSettings.filarum.startPrice;
-      if (amountStart < 0) {
-        evaluateObject.amountElement = '#amountMinus';
+      if (evaluateObject.firstTimeBorrow) {
+        evaluateObject.amountClick = 14;
+      } else {
+        evaluateObject.amountClick = 39;
       }
-      evaluateObject.amountClick = Math.abs(amountStart / 50);
+    } else {
+      amountStart = Math.round(parseInt(searchData.amount) / 100) - 1;
+      evaluateObject.amountClick = amountStart;
     }
 
-    /* Date amount */
-    if (parseInt(searchData.time) < config.loanProvidersSettings.filarum.maxDays) {
-      evaluateObject.timeClick = config.loanProvidersSettings.filarum.maxDays - searchData.time;
-      evaluateObject.timeElement = '#periodMinus';
-    }
+    evaluateObject.timeClick = searchData.time;
 
     return evaluateObject;
   },
@@ -111,26 +106,15 @@ module.exports = {
         page.evaluate(function(args) {
           var pageArguments = JSON.parse(args);
 
-          if (pageArguments.firstTimeBorrow === false) {
-            $('.loanTypeList li:nth-child(2)').trigger('click');
-          }
-
-          /* Calculate amount */
-          for (i = 0, amountIteration = pageArguments.amountClick; i < amountIteration; i++) {
-            $(pageArguments.amountElement).trigger('click');
-          }
-
-          /* Calculate peroid */
-          for (j = 0, timeIteration = pageArguments.timeClick; j < timeIteration; j++) {
-            $(pageArguments.timeElement).trigger('click');
-          }
+          $('#sliderAmount').val(pageArguments.amountClick);
+          $('#sliderTerm').val(pageArguments.timeClick);
+          updateCalc();
 
           return {
-            'amount': $('#loanAmount-label').text(),
-            'paymentDate': $('#paymentDate-label').text(),
-            'commission': $('#commissionAmount-label').text(),
-            'total': $('#total-label').text(),
-            'rrso': $('#rrso-label').text(),
+            'amount': $('.amount .value').text(),
+            'paymentDate': $('.termDate').text(),
+            'commission': $('.interest .value').text(),
+            'total': $('.repayment .value').text(),
           };
 
         }, JSON.stringify(evaluateArguments), function(error, crawlerData) {
@@ -142,11 +126,9 @@ module.exports = {
           crawlerData.amount = common.formatMoney(crawlerData.amount);
           crawlerData.commission = common.formatMoney(crawlerData.commission);
           crawlerData.total = common.formatMoney(crawlerData.total);
-          crawlerData.rrso = common.formatRrso(crawlerData.rrso.toString());
           done(crawlerData);
         });
       };
-
       page.open(website);
     });
   },

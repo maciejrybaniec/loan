@@ -2,13 +2,15 @@ module.exports = {
   mainTemplate: '/index.ejs',
   views: {
     main: {
-      'title': 'LoanApp'
+      'title': 'Bankierski - wiarygodna porównywarka',
+      'loadAngular': true,
     },
     contact: {
-      'title': 'Contact'
+      'title': 'Contact',
+      'loadAngular': false,
     },
   },
-  loanProviders: ['filarum'],
+  loanProviders: ['filarum', 'netcredit', 'vivus', 'ekspreskasa', 'alior'],
   jQueryURL: 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
   crawler: {
     'userAgents': [
@@ -25,6 +27,22 @@ module.exports = {
       startPrice: 1000,
       maxPrice: 3000,
       startDays: 30,
+      maxDays: 30,
+    },
+    vivus: {
+      startPrice: 1600,
+      maxPrice: 4000,
+      startDays: 30,
+      maxDays: 30,
+    },
+    netcredit: {
+      startPrice: 1500,
+      maxPrice: 4000,
+      startDays: 30,
+      maxDays: 30,
+    },
+    ekspreskasa: {
+      maxPrice: 2000,
       maxDays: 30,
     }
   }

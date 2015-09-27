@@ -1,16 +1,9 @@
 <!doctype html>
 <html>
   <%- include('common/head.ejs', {'headSectionData': headSectionData }) %>
-  <body>
-    <ul>
-      <li>
-        <a href="/">home</a>
-      </li>
-      <li>
-        <a href="/contact">contact</a>
-      </li>
-    </ul>
-    <%- include(template, {'templateData': templateData }) %>
+  <body <% if (headSectionData.loadAngular) { %> ng-app="bsApp" <% } %>>
+      <%- include('header.ejs') %>
+      <%- include(template, {'templateData': templateData }) %>
   </body>
-  <% include common/footer.ejs %>
+  <%- include('common/footer.ejs', {'headSectionData': headSectionData }) %>
 </html>

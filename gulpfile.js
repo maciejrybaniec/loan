@@ -19,7 +19,7 @@ gulp.task('less', function() {
     .pipe(less({
       plugins: [cleancss]
     }))
-    .pipe(gulp.dest('./css'));
+    .pipe(gulp.dest('./public/css'));
 });
 
 /* Watch files */
