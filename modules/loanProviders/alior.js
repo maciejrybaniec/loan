@@ -14,6 +14,8 @@ module.exports = {
   calculateLoan: function(data, done) {
     var $this = this;
 
+    console.log(data);
+
     var amountData = [
       500, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 12000, 15000, 17000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 130000, 140000, 150000
     ];
@@ -58,6 +60,8 @@ module.exports = {
     };
 
     var calcualteAmount = calcFn(step, amount, period);
+
+    console.log(amount, period, calcualteAmount);
 
     done({
       'amount': common.formatMoney(amount.toString()),

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('bsApp.main', ['ui-rangeSlider'])
-  .controller('CompareCtrl', ['$scope', function($scope) {
-
+angular.module('bsApp.main', ['bsApp.compare-service', 'ui-rangeSlider'])
+  .controller('CompareCtrl', ['$scope', 'compareService', function($scope, compareService) {
+    /* Variables */
     $scope.amount = {
       value: 1000,
       maxValue: 10000,
@@ -15,29 +15,70 @@ angular.module('bsApp.main', ['ui-rangeSlider'])
       minValue: 1,
     };
 
+    $scope.firstTimeBorrow = true;
+    $scope.providersLoad = false;
+
+    /**
+     * Called when user compare loan providers
+     * @method onLoanCompare
+     */
+    $scope.onLoanCompare = function() {
+        var requestObject = {
+          'time': $scope.time.value,
+          'amount': $scope.amount.value,
+          'firstTimeBorrow': $scope.firstTimeBorrow,
+        };
+        $scope.providersLoad = true;
+        compareService.getLoanProviders(requestObject, $scope.onCompareReturn);
+      }
+      /**
+       * Handle response from compare service
+       * {object} [response] response object
+       * @method onCompareReturn
+       */
+    $scope.onCompareReturn = function(response) {
+      $scope.providersLoad = false;
+      if (response === false) {
+
+      } else {
+        $scope.loanProviders = response;
+      }
+    }
+
+    /**
+     * Called when user increment amount value
+     * @method increaseAmount
+     */
     $scope.increaseAmount = function() {
       if ($scope.amount.value !== $scope.amount.maxValue) {
         $scope.amount.value += $scope.amount.minValue;
       }
     };
-
+    /**
+     * Called when user decrement amount value
+     * @method increaseAmount
+     */
     $scope.decreaseAmount = function() {
       if ($scope.amount.value !== $scope.amount.minValue) {
         $scope.amount.value -= $scope.amount.minValue;
       }
     };
-
+    /**
+     * Called when user increment time value
+     * @method increaseAmount
+     */
     $scope.increaseTime = function() {
       if ($scope.time.value !== $scope.time.maxValue) {
         $scope.time.value += $scope.time.minValue;
       }
     };
-
+    /**
+     * Called when user decrement time value
+     * @method increaseAmount
+     */
     $scope.decreaseTime = function() {
       if ($scope.time.value !== $scope.time.minValue) {
         $scope.time.value -= $scope.time.minValue;
       }
     };
-
-
   }]);

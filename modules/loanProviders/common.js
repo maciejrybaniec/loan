@@ -35,7 +35,7 @@ module.exports = {
     return accounting.formatMoney(clearMoney, {
       symbol: '%',
       format: "%v %s"
-    }, 2, ".", ",");
+    }, 2, ".");
   },
   /**
    * Convert days to month number peroid

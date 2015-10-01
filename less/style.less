@@ -66,6 +66,10 @@ body {
   }
 }
 #bs-compare {
+  .bs-wrapper {
+    position: relative;
+    .animate(.6s);
+  }
   h1,
   h2 {
     color: @bs-white;
@@ -130,6 +134,9 @@ body {
     @media (min-width: @bs-screen-sm-bootstrap) {
       margin-top: 50px;
     }
+  }
+  .bs-time-slider {
+    margin-bottom: 35px;
   }
   .bs-compare-label {
     color: @bs-white;
@@ -196,27 +203,83 @@ body {
     .bs-scale-quarter {
       display: inline-block;
       left: 25%;
-      margin-left: -11px;
+      margin-left: -13px;
     }
     .bs-scale-triple-quarter {
       display: inline-block;
       left: 75%;
-      margin-left: -11px;
+      margin-left: -10px;
     }
     .bs-scale-middle {
       display: inline-block;
       left: 50%;
-      margin-left: -11px;
+      margin-left: -12px;
     }
     .bs-scale-end {
       right: -17px;
     }
+  }
+  .bs-compare-action {
+    padding-bottom: 35px;
   }
 }
 .bs-scale {
   top: -22px;
   display: inline-block;
   position: absolute;
+}
+@bs-loan-provider-border: #e3dfde;
+.bs-loan-provider {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-bottom: 10px;
+  border: solid 1px @bs-loan-provider-border;
+  .bs-provider-label {
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin: 0 0 15px;
+    @media (min-width: @bs-screen-md-bootstrap) {
+      margin: 0 0 30px;
+    }
+  }
+  .bs-provider-value {
+    font-size: 22px;
+    font-weight: 300;
+  }
+  & > div {
+    margin-bottom: 30px;
+    @media (min-width: @bs-screen-md-bootstrap) {
+      margin-bottom: 0;
+    }
+  }
+}
+#bs-compare {
+  .bs-loader-heading {
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 27px;
+    color: @bs-white;
+    text-transform: uppercase;
+  }
+  &.bs-loading {
+    .bs-loader {
+      display: block;
+    }
+    .bs-wrapper {
+      opacity: 0.1;
+      .animate(.6s);
+    }
+  }
+  .bs-loader {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    margin-top: -54px;
+    margin-left: -74px;
+  }
 }
 .bs-blue-background {
   background: url("../img/blue-background.png");
@@ -234,11 +297,28 @@ body {
     padding-right: 0;
   }
 }
+.bs-pR {
+  position: relative;
+}
 .bs-button-sm {
   padding: 5px 15px;
   .border-radius(3px);
   &:hover {
     color: @bs-navbar-link-color;
+  }
+}
+.bs-standard-button {
+  display: inline-block;
+  cursor: pointer;
+  background: @bs-navbar-background;
+  color: @bs-white;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 12px 45px;
+  .animate(.3s);
+  .border-radius(4px);
+  &:hover {
+    color: @bs-navbar-link-hover-color;
   }
 }
 .bs-button-orange {
@@ -255,3 +335,4 @@ body {
   border-bottom: 5px solid @bs-white;
 }
 @import 'components/angular-slider.less';
+@import 'components/loader.less';
