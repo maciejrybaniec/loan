@@ -1,10 +1,11 @@
 var config = require('./../config'),
-  providerHandler = require('./loanProviders/main');
+  Loan = require('./models/Loan');
+
 
 /* Comparison module */
-function Comparison(db) {
+function Comparison(database) {
+  this.database = database;
   'use strict';
-
 }
 
 Comparison.prototype = {
@@ -27,7 +28,15 @@ Comparison.prototype = {
         return false;
       }
 
-      $this.getLoanConditions(req.body, function(comparisonData) {
+      $this.getLoanConditions(req.body, function(error, comparisonData) {
+        if (error) {
+          res.status(500);
+          res.json({
+            'error': 'e_database_error',
+          });
+          return false;
+        }
+
         res.status(200);
         res.json(comparisonData);
       });
@@ -75,7 +84,7 @@ Comparison.prototype = {
      * @method validateTime
      */
     function validateFirstTimeBorrow(firstTimeBorrow) {
-      if (!firstTimeBorrow || firstTimeBorrow.length === 0) {
+      if (firstTimeBorrow.length === 0) {
         errors.push({
           'name': 'firstTimeBorrow',
           'error': 'e_firstTimeBorrow'
@@ -97,21 +106,16 @@ Comparison.prototype = {
    * @method getLoanConditions
    */
   getLoanConditions: function(data, callback) {
-    var iterator = 0,
-      crawlerDataArray = [],
-      providersLength = config.loanProviders.length;
-
-    config.loanProviders.forEach(function(provider) {
-      providerHandler[provider](data, function(crawlerData) {
-        if (crawlerData !== false) {
-          crawlerDataArray.push(crawlerData);
-        }
-        iterator++;
-
-        if (iterator === providersLength) {
-          callback(crawlerDataArray);
-        }
-      });
+    Loan.find({
+      'days': data.time,
+      'amount': data.amount,
+      'firstTime': data.firstTimeBorrow,
+    }, function(err, docs) {
+      if (err) {
+        callback(true);
+        return false;
+      }
+      callback(false, docs);
     });
   },
 }

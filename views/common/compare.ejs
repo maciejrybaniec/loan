@@ -3,84 +3,83 @@
     <%- include('loader.ejs') %>
     <div class="col-xs-12 text-center bs-blue-background">
       <section class="bs-wrapper clearfix">
-      <h1>Potrzebujesz gotówki ?</h1>
-      <h2>
-        <span class="bs-normal">Porównaj</span>
-        najlepsze oferty kredytów i pożyczek
-      </h2>
-      <div class="bs-amount-slider col-xs-12 clearfix">
-        <div class="col-xs-12 col-md-3 bs-compare-label-box">
-          <span class="bs-compare-label">ustaw kwotę</span>
-          <span class="bs-slider-decrease" ng-click="decreaseAmount()">-</span>
-          <span class="bs-slider-value pull-right" ng-bind="amount.value + ' zł'"></span>
-        </div>
-        <div class="col-xs-12 col-md-6">
-          <div class="bs-amount-scale clearfix">
-            <span class="bs-scale bs-scale-start">100</span>
-            <span class="bs-scale bs-scale-quarter">2500
-              <span class="bs-arrow-up"></span>
-            </span>
-            <span class="bs-scale bs-scale-middle">5000
-              <span class="bs-arrow-up"></span>
-            </span>
-            <span class="bs-scale bs-scale-triple-quarter">7500
-              <span class="bs-arrow-up"></span>
-            </span>
-            <span class="bs-scale bs-scale-end">10 000</span>
+        <h1>Potrzebujesz gotówki ?</h1>
+        <h2>
+          <span class="bs-normal">Porównaj</span>
+          najlepsze oferty kredytów i pożyczek
+        </h2>
+        <div class="bs-amount-slider col-xs-12 clearfix">
+          <div class="col-xs-12 col-md-3 bs-compare-label-box">
+            <span class="bs-compare-label">ustaw kwotę</span>
+            <span class="bs-slider-decrease" ng-click="decreaseAmount()">-</span>
+            <span class="bs-slider-value pull-right" ng-bind="amount.value + ' zł'"></span>
           </div>
-          <div max="amount.maxValue" min="amount.minValue" model-max="amount.value" pin-handle="min" range-slider step="100"></div>
-        </div>
-        <div class="col-xs-12 col-md-3 bs-compare-value-box">
-          <span class="bs-slider-increase" ng-click="increaseAmount()">+</span>
-          <span class="bs-slider-value" ng-bind="amount.value"></span>
-          <span class="bs-compare-unit">zł</span>
-        </div>
-      </div>
-      <div class="bs-time-slider col-xs-12 clearfix">
-        <div class="col-xs-12 col-md-3 bs-compare-label-box">
-          <span class="bs-compare-label">okres spłaty</span>
-          <span class="bs-slider-decrease" ng-click="decreaseTime()">-</span>
-          <span class="bs-slider-value pull-right " ng-bind="time.value + ' dni'"></span>
-        </div>
-        <div class="col-xs-12 col-md-6">
-          <div class="bs-time-scale clearfix">
-            <span class="bs-scale bs-scale-start">1</span>
-            <span class="bs-scale bs-scale-end">100</span>
+          <div class="col-xs-12 col-md-6">
+            <div class="bs-amount-scale clearfix">
+              <span class="bs-scale bs-scale-start">100</span>
+              <span class="bs-scale bs-scale-quarter">2500
+                <span class="bs-arrow-up"></span>
+              </span>
+              <span class="bs-scale bs-scale-middle">5000
+                <span class="bs-arrow-up"></span>
+              </span>
+              <span class="bs-scale bs-scale-triple-quarter">7500
+                <span class="bs-arrow-up"></span>
+              </span>
+              <span class="bs-scale bs-scale-end">10 000</span>
+            </div>
+            <div max="amount.maxValue" min="amount.minValue" model-max="amount.value" pin-handle="min" range-slider step="100"></div>
           </div>
-          <div max="time.maxValue" min="time.minValue" model-max="time.value" pin-handle="min" range-slider step="1"></div>
+          <div class="col-xs-12 col-md-3 bs-compare-value-box">
+            <span class="bs-slider-increase" ng-click="increaseAmount()">+</span>
+            <span class="bs-slider-value" ng-bind="amount.value"></span>
+            <span class="bs-compare-unit">zł</span>
+          </div>
         </div>
-        <div class="col-xs-12 col-md-3 bs-compare-value-box">
-          <span class="bs-slider-increase" ng-click="increaseTime()">+</span>
-          <span class="bs-slider-value" ng-bind="time.value"></span>
-          <span class="bs-compare-unit">dni</span>
+        <div class="bs-time-slider col-xs-12 clearfix">
+          <div class="col-xs-12 col-md-3 bs-compare-label-box">
+            <span class="bs-compare-label">okres spłaty</span>
+            <span class="bs-slider-decrease" ng-click="decreaseTime()">-</span>
+            <span class="bs-slider-value pull-right " ng-bind="time.value + ' dni'"></span>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="bs-time-scale clearfix">
+              <span class="bs-scale bs-scale-start">1</span>
+              <span class="bs-scale bs-scale-end">100</span>
+            </div>
+            <div max="time.maxValue" min="time.minValue" model-max="time.value" pin-handle="min" range-slider step="1"></div>
+          </div>
+          <div class="col-xs-12 col-md-3 bs-compare-value-box">
+            <span class="bs-slider-increase" ng-click="increaseTime()">+</span>
+            <span class="bs-slider-value" ng-bind="time.value"></span>
+            <span class="bs-compare-unit">dni</span>
+          </div>
         </div>
-      </div>
-      <div class="col-xs-12 text-center bs-compare-action">
-        <span class="bs-standard-button" id="bs-compare-action" ng-click="onLoanCompare()">Porównaj</span>
-      </div>
-    </section>
+        <div class="col-xs-12 text-center bs-compare-action">
+          <span class="bs-standard-button" id="bs-compare-action" ng-click="onLoanCompare()">Porównaj</span>
+        </div>
+      </section>
     </div>
   </div>
   <section class="container bs-loan-provides" ng-if="loanProviders">
     <ul class="list-unstyled bs-compare-results">
       <li class="bs-loan-provider col-xs-12" ng-repeat="provider in loanProviders">
-        <div class="col-xs-6 col-sm-4 col-md-2">Logo</div>
-        <div class="col-xs-6 col-sm-4 col-md-2">
-          <h5 class="bs-provider-label">kwota</h5>
-          <span class="bs-provider-value">{{provider.amount}}</span>
+        <div class="col-xs-6 col-sm-4 col-md-2 bs-provider-logo">
+          <img alt="{{provider.provider}}" ng-src="img/providers/{{provider.provider}}.png"/>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-2">
           <h5 class="bs-provider-label">rata</h5>
-          <span class="bs-provider-value">{{provider.total}}</span>
+          <span class="bs-provider-value">{{provider.total | number : 2 }}
+            zł</span>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-2">
           <h5 class="bs-provider-label">rrso</h5>
-          <span class="bs-provider-value" ng-if="provider.rrso">{{provider.rrso}}</span>
-          <span class="bs-provider-value" ng-if="!provider.rrso">b/d</span>
+          <span class="bs-provider-value">{{provider.rrso | number : 1 }}%</span>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-2">
           <h5 class="bs-provider-label">prowizja</h5>
-          <span class="bs-provider-value">{{provider.commission}}</span>
+          <span class="bs-provider-value">{{provider.commission | number : 2 }}
+            zł</span>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-2">Logo</div>
       </li>

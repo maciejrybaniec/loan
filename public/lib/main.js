@@ -15,7 +15,7 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'ui-rangeSlider'])
       minValue: 1,
     };
 
-    $scope.firstTimeBorrow = true;
+    $scope.firstTimeBorrow = false;
     $scope.providersLoad = false;
 
     /**
