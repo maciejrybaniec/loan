@@ -1,0 +1,30 @@
+.bs-testimonials {
+  @bs-testimonials-color: #000;
+  color: @bs-testimonials-color;
+  margin: 30px 0;
+  @media (min-width: @bs-screen-sm-bootstrap) {
+    margin: 50px 0 40px 0;
+  }
+  .bs-testimonial-box {
+    margin-bottom: 20px;
+    text-align: center;
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      margin-bottom: 0;
+    }
+  }
+  h2 {
+    font-size: 18px;
+    text-transform: uppercase;
+    .text-hide();
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      font-size: 20px;
+    }
+    @media (min-width: @bs-screen-md-bootstrap) {
+      font-size: 22px;
+    }
+  }
+  p {
+    font-weight: 300;
+    font-size: 12px;
+  }
+}

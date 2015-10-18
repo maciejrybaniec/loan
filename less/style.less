@@ -4,6 +4,12 @@ body {
   font-family: 'Montserrat', sans-serif;
   padding-top: 70px;
   margin: 0;
+  &[data-compare="true"] {
+    .bs-testimonials,
+    .bs-advantages {
+      display: none;
+    }
+  }
 }
 
 /* Navbar background */
@@ -17,6 +23,9 @@ body {
 @bs-black: #000;
 @bs-orange-hover: #f29719;
 @bs-shadow-color: #61c6c8;
+@bs-additional-label-color: #a09896;
+@bs-additional-label: #e9eaeb;
+@bs-additional-label-hover: #ececec;
 @bs-screen-sm: 500px;
 @bs-screen-sm-bootstrap: 768px;
 @bs-screen-md-bootstrap: 992px;
@@ -65,233 +74,68 @@ body {
     }
   }
 }
-#bs-compare {
-  .bs-wrapper {
-    position: relative;
-    .animate(.6s);
-  }
-  h1,
-  h2 {
-    color: @bs-white;
-    text-transform: uppercase;
-    font-weight: 300;
-    text-shadow: 1px 1px 3px @bs-shadow-color;
-  }
-  h1 {
-    margin: 25px 0 0;
-    padding: 0;
+.bs-advantages {
+  h3 {
+    margin: 0;
+    padding: 10px 0;
     font-size: 20px;
-    @media (min-width: @bs-screen-sm-bootstrap) {
-      font-size: 28px;
-    }
-    @media (min-width: @bs-screen-md-bootstrap) {
-      margin: 30px 0 0;
-      font-size: 32px;
-    }
-    @media (min-width: @bs-screen-lg-bootstrap) {
-      font-size: 36px;
-      margin: 45px 0 0;
-    }
-  }
-  h2 {
-    margin: 5px 0 0;
-    padding: 0;
-    font-size: 14px;
-    line-height: 22px;
-    @media (min-width: @bs-screen-sm-bootstrap) {
-      font-size: 20px;
-      line-height: 26px;
-    }
-    @media (min-width: @bs-screen-md-bootstrap) {
-      font-size: 22px;
-    }
-    @media (min-width: @bs-screen-lg-bootstrap) {
-      font-size: 24px;
-      line-height: 30px;
-    }
-  }
-  .bs-slider-increase,
-  .bs-slider-decrease {
-    display: none;
-    @media (min-width: @bs-screen-md-bootstrap) {
-      display: inline-block;
-      line-height: 21px;
-      font-size: 25px;
-      color: @bs-navbar-background;
-      cursor: pointer;
-      .disable-select();
-    }
-  }
-  .bs-slider-increase {
-    float: left;
-  }
-  .bs-slider-decrease {
-    float: right;
-  }
-  .bs-amount-slider {
-    margin-top: 30px;
-    margin-bottom: 35px;
-    @media (min-width: @bs-screen-sm-bootstrap) {
-      margin-top: 50px;
-    }
-  }
-  .bs-time-slider {
-    margin-bottom: 35px;
-  }
-  .bs-compare-label {
-    color: @bs-white;
     text-transform: uppercase;
-    font-weight: 700;
-    line-height: 24px;
+    text-shadow: 1px 1px 3px @bs-shadow-color;
+    color: @bs-white;
   }
-  .bs-compare-label-box {
+  p {
+    font-size: 13px;
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      font-size: 16px;
+    }
+    text-shadow: 1px 1px 3px @bs-shadow-color;
+    color: @bs-white;
     margin-bottom: 15px;
-    text-align: left;
-    .bs-slider-value {
-      @media (min-width: @bs-screen-md-bootstrap) {
-        display: none;
-      }
-    }
-    @media (min-width: @bs-screen-md-bootstrap) {
-      text-align: center;
-      margin-bottom: 0;
-    }
-  }
-  .bs-compare-value-box {
-    margin-top: 15px;
-    display: none;
-    @media (min-width: @bs-screen-md-bootstrap) {
-      display: block;
-      margin-top: 0;
-    }
-  }
-  .bs-compare-unit {
-    display: inline-block;
-    width: 30px;
-    text-transform: uppercase;
-    color: @bs-white;
-  }
-  .bs-slider-value {
-    display: inline-block;
-    line-height: 24px;
-    background: @bs-white;
-    text-align: center;
-    width: 100px;
-    color: @bs-black;
-    @media (min-width: @bs-screen-md-bootstrap) {
-      margin-right: 5px;
-    }
-  }
-  .bs-amount-scale,
-  .bs-time-scale {
-    display: none;
-    @media (min-width: @bs-screen-md-bootstrap) {
-      position: relative;
-      color: @bs-white;
-      font-size: 11px;
-      display: block;
-    }
-    .bs-arrow-up {
-      position: absolute;
-      top: 18px;
-      left: 50%;
-      margin-left: -5px;
-    }
-    .bs-scale-start {
-      left: -6px;
-    }
-    .bs-scale-quarter {
-      display: inline-block;
-      left: 25%;
-      margin-left: -13px;
-    }
-    .bs-scale-triple-quarter {
-      display: inline-block;
-      left: 75%;
-      margin-left: -10px;
-    }
-    .bs-scale-middle {
-      display: inline-block;
-      left: 50%;
-      margin-left: -12px;
-    }
-    .bs-scale-end {
-      right: -17px;
-    }
-  }
-  .bs-compare-action {
-    padding-bottom: 35px;
   }
 }
-.bs-scale {
-  top: -22px;
+.bs-break-line {
+  max-width: 30px;
+  width: 100%;
   display: inline-block;
-  position: absolute;
-}
-@bs-loan-provider-border: #e3dfde;
-.bs-loan-provider {
-  padding-top: 25px;
-  padding-bottom: 25px;
+  height: 2px;
+  background: @bs-black;
   margin-bottom: 10px;
-  border: solid 1px @bs-loan-provider-border;
-  .bs-provider-logo {
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      border: none;
-      margin-top: 10px;
-    }
-  }
-  .bs-provider-label {
-    font-weight: 300;
-    text-transform: uppercase;
-    font-size: 12px;
-    margin: 0 0 15px;
-    @media (min-width: @bs-screen-md-bootstrap) {
-      margin: 0 0 30px;
-    }
-  }
-  .bs-provider-value {
-    font-size: 22px;
-    font-weight: 300;
-  }
-  & > div {
-    margin-bottom: 30px;
-    @media (min-width: @bs-screen-md-bootstrap) {
-      margin-bottom: 0;
-    }
+  margin-top: 10px;
+  &.bs-white {
+    background: @bs-white;
   }
 }
-#bs-compare {
-  .bs-loader-heading {
-    font-weight: 300;
-    font-size: 17px;
-    line-height: 27px;
-    color: @bs-white;
-    text-transform: uppercase;
+.bs-additional-label {
+  font-weight: 300;
+  font-size: 11px;
+  padding: 5px 25px;
+  cursor: pointer;
+  color: @bs-additional-label-color;
+  background: @bs-additional-label;
+  @media (min-width: @bs-screen-sm-bootstrap) {
+    font-size: 12px;
   }
-  &.bs-loading {
-    .bs-loader {
-      display: block;
-    }
-    .bs-wrapper {
-      opacity: 0.1;
-      .animate(.6s);
-    }
+  .animate(.2s);
+  &:hover {
+    background: @bs-additional-label-hover;
   }
-  .bs-loader {
-    display: none;
-    position: absolute;
-    z-index: 999;
-    top: 50%;
-    left: 50%;
-    margin-top: -54px;
-    margin-left: -74px;
+}
+.bs-additional-label + .bs-additional-label {
+  margin-left: 0;
+  @media (min-width: @bs-screen-sm-bootstrap) {
+    margin-left: 10px;
   }
 }
 .bs-blue-background {
   background: url("../img/blue-background.png");
+}
+.bs-background-hands {
+  background: url("../img/hands.png");
+  margin: 0 -15px;
+  padding: 50px 0;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 .bs-normal {
   font-weight: 400;
@@ -344,4 +188,6 @@ body {
   border-bottom: 5px solid @bs-white;
 }
 @import 'components/angular-slider.less';
+@import 'components/bs-compare.less';
+@import 'components/bs-testimonials.less';
 @import 'components/loader.less';

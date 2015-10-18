@@ -15,6 +15,8 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'ui-rangeSlider'])
       minValue: 1,
     };
 
+    $scope.searchArguments = {};
+
     $scope.firstTimeBorrow = false;
     $scope.providersLoad = false;
 
@@ -23,6 +25,9 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'ui-rangeSlider'])
      * @method onLoanCompare
      */
     $scope.onLoanCompare = function() {
+        var body = document.getElementsByTagName('body')[0];
+        body.setAttribute('data-compare', true);
+
         var requestObject = {
           'time': $scope.time.value,
           'amount': $scope.amount.value,
@@ -41,6 +46,8 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'ui-rangeSlider'])
       if (response === false) {
 
       } else {
+        $scope.searchArguments.value = $scope.amount.value;
+        $scope.searchArguments.time = $scope.time.value;
         $scope.loanProviders = response;
       }
     }

@@ -61,28 +61,5 @@
       </section>
     </div>
   </div>
-  <section class="container bs-loan-provides" ng-if="loanProviders">
-    <ul class="list-unstyled bs-compare-results">
-      <li class="bs-loan-provider col-xs-12" ng-repeat="provider in loanProviders">
-        <div class="col-xs-6 col-sm-4 col-md-2 bs-provider-logo">
-          <img alt="{{provider.provider}}" ng-src="img/providers/{{provider.provider}}.png"/>
-        </div>
-        <div class="col-xs-6 col-sm-4 col-md-2">
-          <h5 class="bs-provider-label">rata</h5>
-          <span class="bs-provider-value">{{provider.total | number : 2 }}
-            zł</span>
-        </div>
-        <div class="col-xs-6 col-sm-4 col-md-2">
-          <h5 class="bs-provider-label">rrso</h5>
-          <span class="bs-provider-value">{{provider.rrso | number : 1 }}%</span>
-        </div>
-        <div class="col-xs-6 col-sm-4 col-md-2">
-          <h5 class="bs-provider-label">prowizja</h5>
-          <span class="bs-provider-value">{{provider.commission | number : 2 }}
-            zł</span>
-        </div>
-        <div class="col-xs-6 col-sm-4 col-md-2">Logo</div>
-      </li>
-    </ul>
-  </section>
+  <%- include('results.ejs') %>
 </section>

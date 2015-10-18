@@ -1,0 +1,304 @@
+@bs-loan-provider-border: #e3dfde;
+@bs-loan-result-header: #000;
+@bs-search-icon: #2eb7b8;
+#bs-compare {
+  .bs-wrapper {
+    position: relative;
+    .animate(.6s);
+  }
+  .bs-provider-additional {
+    margin-top: 15px;
+    border-top: solid 1px @bs-loan-provider-border;
+    padding-top: 10px;
+    text-align: center;
+    margin-bottom: 0;
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      text-align: right;
+    }
+  }
+  .bs-provider-additional-container,
+  .bs-button-box {
+    margin-bottom: 0;
+  }
+  .bs-compare-button {
+    display: block;
+    text-decoration: none;
+    padding: 12px 5px;
+    font-size: 15px;
+    background: @bs-orange;
+    text-transform: uppercase;
+    color: @bs-white;
+    font-weight: 700;
+    @media (min-width: @bs-screen-md-bootstrap) {
+      padding: 20px 5px;
+    }
+    span,
+    i {
+      @media (min-width: @bs-screen-md-bootstrap) {
+        display: block;
+      }
+    }
+    .animate(.2s);
+    &:hover {
+      background: @bs-orange-hover;
+    }
+  }
+  h1,
+  h2 {
+    color: @bs-white;
+    text-transform: uppercase;
+    font-weight: 300;
+    text-shadow: 1px 1px 3px @bs-shadow-color;
+  }
+  h1 {
+    margin: 25px 0 0;
+    padding: 0;
+    font-size: 20px;
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      font-size: 28px;
+    }
+    @media (min-width: @bs-screen-md-bootstrap) {
+      margin: 30px 0 0;
+      font-size: 32px;
+    }
+    @media (min-width: @bs-screen-lg-bootstrap) {
+      font-size: 36px;
+      margin: 45px 0 0;
+    }
+  }
+  h2 {
+    margin: 5px 0 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 22px;
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      font-size: 20px;
+      line-height: 26px;
+    }
+    @media (min-width: @bs-screen-md-bootstrap) {
+      font-size: 22px;
+    }
+    @media (min-width: @bs-screen-lg-bootstrap) {
+      font-size: 24px;
+      line-height: 30px;
+    }
+  }
+  .bs-slider-increase,
+  .bs-slider-decrease {
+    display: none;
+    @media (min-width: @bs-screen-md-bootstrap) {
+      display: inline-block;
+      line-height: 21px;
+      font-size: 25px;
+      color: @bs-navbar-background;
+      cursor: pointer;
+      .disable-select();
+    }
+  }
+  .bs-slider-increase {
+    float: left;
+  }
+  .bs-slider-decrease {
+    float: right;
+  }
+  .bs-amount-slider {
+    margin-top: 30px;
+    margin-bottom: 35px;
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      margin-top: 50px;
+    }
+  }
+  .bs-time-slider {
+    margin-bottom: 35px;
+  }
+  .bs-compare-label {
+    color: @bs-white;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 24px;
+  }
+  .bs-compare-label-box {
+    margin-bottom: 15px;
+    text-align: left;
+    .bs-slider-value {
+      @media (min-width: @bs-screen-md-bootstrap) {
+        display: none;
+      }
+    }
+    @media (min-width: @bs-screen-md-bootstrap) {
+      text-align: center;
+      margin-bottom: 0;
+    }
+  }
+  .bs-compare-value-box {
+    margin-top: 15px;
+    display: none;
+    @media (min-width: @bs-screen-md-bootstrap) {
+      display: block;
+      margin-top: 0;
+    }
+  }
+  .bs-compare-unit {
+    display: inline-block;
+    width: 30px;
+    text-transform: uppercase;
+    color: @bs-white;
+  }
+  .bs-slider-value {
+    display: inline-block;
+    line-height: 24px;
+    background: @bs-white;
+    text-align: center;
+    width: 100px;
+    color: @bs-black;
+    @media (min-width: @bs-screen-md-bootstrap) {
+      margin-right: 5px;
+    }
+  }
+  .bs-amount-scale,
+  .bs-time-scale {
+    display: none;
+    @media (min-width: @bs-screen-md-bootstrap) {
+      position: relative;
+      color: @bs-white;
+      font-size: 11px;
+      display: block;
+    }
+    .bs-arrow-up {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      margin-left: -5px;
+    }
+    .bs-scale-start {
+      left: -6px;
+    }
+    .bs-scale-quarter {
+      display: inline-block;
+      left: 25%;
+      margin-left: -13px;
+    }
+    .bs-scale-triple-quarter {
+      display: inline-block;
+      left: 75%;
+      margin-left: -10px;
+    }
+    .bs-scale-middle {
+      display: inline-block;
+      left: 50%;
+      margin-left: -12px;
+    }
+    .bs-scale-end {
+      right: -17px;
+    }
+  }
+  .bs-compare-action {
+    padding-bottom: 35px;
+  }
+  .bs-results-header {
+    padding: 25px 0 20px;
+    h3 {
+      font-size: 20px;
+      margin: 0 0 5px;
+      padding: 0;
+      i {
+        color: @bs-search-icon;
+      }
+    }
+    p {
+      margin: 0;
+      font-size: 12px;
+    }
+    @media (min-width: @bs-screen-md-bootstrap) {
+      h3 {
+        font-size: 24px;
+      }
+      p {
+        font-size: 15px;
+      }
+    }
+    h3,
+    p {
+      text-transform: uppercase;
+      font-weight: 200;
+      color: @bs-loan-result-header;
+    }
+  }
+  .bs-loader-heading {
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 27px;
+    color: @bs-white;
+    text-transform: uppercase;
+  }
+  &.bs-loading {
+    .bs-loader {
+      display: block;
+    }
+    .bs-wrapper {
+      opacity: 0.1;
+      .animate(.6s);
+    }
+  }
+  .bs-loader {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    margin-top: -54px;
+    margin-left: -74px;
+  }
+}
+.bs-scale {
+  top: -22px;
+  display: inline-block;
+  position: absolute;
+}
+.bs-loan-provider {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  @media (min-width: @bs-screen-sm-bootstrap) {
+    padding-top: 25px;
+  }
+  margin-bottom: 15px;
+  border: solid 1px @bs-loan-provider-border;
+  .bs-provider-logo {
+    text-align: center;
+    @media (min-width: @bs-screen-md-bootstrap) {
+      text-align: left;
+    }
+    img {
+      max-width: 45%;
+      @media (min-width: @bs-screen-sm-bootstrap) {
+        max-width: 100%;
+      }
+      display: inline-block;
+      height: auto;
+      border: none;
+      margin-top: 10px;
+    }
+  }
+  .bs-provider-label {
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin: 0 0 15px;
+    @media (min-width: @bs-screen-md-bootstrap) {
+      margin: 0 0 30px;
+    }
+  }
+  .bs-provider-value {
+    font-size: 18px;
+    font-weight: 300;
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      font-size: 22px;
+    }
+  }
+  & > div {
+    margin-bottom: 20px;
+    @media (min-width: @bs-screen-md-bootstrap) {
+      margin-bottom: 0;
+    }
+  }
+}
