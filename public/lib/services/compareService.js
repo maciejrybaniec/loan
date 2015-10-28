@@ -15,7 +15,7 @@ angular.module('bsApp.compare-service', [])
         url: appConfig.apiUrl + '/compare'
       }).then(function successCallback(response) {
         callback(response.data);
-      }, function errorCallback() {
+      }, function errorCallback(error) {
         callback(false);
       });
     }

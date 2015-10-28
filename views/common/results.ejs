@@ -1,4 +1,4 @@
-<section class="container bs-loan-provides" ng-if="loanProviders">
+<section class="container bs-loan-provides" ng-if="compareTrigger">
   <header class="bs-results-header text-center clearfix" id="bs-search-results">
     <div class="col-xs-12">
       <h3>
@@ -11,7 +11,10 @@
         dni</p>
     </div>
   </header>
-  <ul class="list-unstyled bs-compare-results">
+  <div class="bs-empty-results text-center col-xs-10 col-xs-offset-1" ng-if="loanProviders.length === 0">
+    Niestety nie znaleźlśmy ofert spełniających kryteria wyszukiwania. Być może zainteresują Cię nasze poniżej przygotowane oferty.
+  </div>
+  <ul class="list-unstyled bs-compare-results" ng-if="loanProviders">
     <li class="bs-loan-provider col-xs-12" ng-repeat="provider in loanProviders">
       <div class="col-xs-12 col-sm-3 col-md-3 bs-provider-logo">
         <img alt="{{provider.provider}}" ng-src="img/providers/{{provider.provider}}.png"/>

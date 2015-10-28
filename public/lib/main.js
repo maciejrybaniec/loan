@@ -19,6 +19,7 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'ui-rangeSlider'])
 
     $scope.firstTimeBorrow = false;
     $scope.providersLoad = false;
+    $scope.compareTrigger = false;
 
     /**
      * Called when user compare loan providers
@@ -33,6 +34,8 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'ui-rangeSlider'])
           'amount': $scope.amount.value,
           'firstTimeBorrow': $scope.firstTimeBorrow,
         };
+        
+        $scope.compareTrigger = true;
         $scope.providersLoad = true;
         compareService.getLoanProviders(requestObject, $scope.onCompareReturn);
       }

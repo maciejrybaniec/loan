@@ -40,7 +40,7 @@
           <div class="col-xs-12 col-md-3 bs-compare-label-box">
             <span class="bs-compare-label">okres spłaty</span>
             <span class="bs-slider-decrease" ng-click="decreaseTime()">-</span>
-            <span class="bs-slider-value pull-right " ng-bind="time.value + ' dni'"></span>
+            <span class="bs-slider-value pull-right" ng-bind="time.value + ' dni'"></span>
           </div>
           <div class="col-xs-12 col-md-6">
             <div class="bs-time-scale clearfix">
@@ -56,6 +56,10 @@
           </div>
         </div>
         <div class="col-xs-12 text-center bs-compare-action">
+          <div class="bs-borrow-count">
+           <input type="checkbox" id="firstTimeBorrow" name="firstTimeBorrow" ng-model="firstTimeBorrow">
+            <label for="firstTimeBorrow">Pożyczam pierwszy raz</label>
+          </div>
           <span class="bs-standard-button" id="bs-compare-action" ng-click="onLoanCompare()">Porównaj</span>
         </div>
       </section>
