@@ -22,6 +22,7 @@ body {
 @bs-orange: #f99c1c;
 @bs-gray: #e1e1e1;
 @bs-black: #000;
+@bs-redirect-background: #26909e;
 @bs-light-blue: #25a5b0;
 @bs-orange-hover: #f29719;
 @bs-shadow-color: #61c6c8;
@@ -407,6 +408,21 @@ body {
           }
         }
       }
+    }
+  }
+}
+.bs-redirect {
+  background: @bs-redirect-background;
+  h3 {
+    padding: 25px 0;
+    margin: 0;
+    color: @bs-white;
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 26px;
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      font-size: 23px;
+      line-height: 30px;
     }
   }
 }

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <%- include('../common/head.ejs', {'headSectionData': headSectionData }) %>
+  <body class="bs-redirect">
+    <section class="container">
+      <div class="col-xs-12 text-center">
+        <img alt="Logo" src="/img/logo.png">
+        <h3>Trwa przekierowanie. Zespół Bankierski życzy Ci szybkiej akceptacji.</h3>
+      </div>
+      <section class="bs-loader clearfix">
+        <div class="sk-folding-cube">
+          <div class="sk-cube1 sk-cube"></div>
+          <div class="sk-cube2 sk-cube"></div>
+          <div class="sk-cube4 sk-cube"></div>
+          <div class="sk-cube3 sk-cube"></div>
+        </div>
+      </section>
+    </section>
+  </body>
+  <script type="text/javascript">
+    (function() {
+      setTimeout(function() {
+        var distributorId = <%= templateData.distributorId %>;
+        window.location = 'http://bankierski.oferty-kredytowe.pl/o/salechannel.php?idSaleChannel=' + <%= templateData.redirect.idSale %>+ '&idDistributor=' + distributorId;
+      }, <%= templateData.redirectTime %>);
+    })();
+  </script>
+</html>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <%- include('common/head.ejs', {'headSectionData': headSectionData }) %>
-  <body <% if (headSectionData.loadAngular) { %> ng-app="bsApp" <% } %> data-compare="false">
+  <body <% if (headSectionData.loadAngular) { %> ng-app="bsApp" ng-cloak <% } %> data-compare="false">
       <%- include('header.ejs') %>
       <%- include(template, {'templateData': templateData }) %>
   <%- include('common/footer.ejs', {'headSectionData': headSectionData }) %>
