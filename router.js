@@ -6,6 +6,7 @@ var express = require('express'),
 
 var Comparison = require('./modules/comparison');
 var Redirect = require('./modules/redirect');
+var Detail = require('./modules/detail');
 var viewMainTemplate = config.mainTemplate;
 
 /* Connect to MongoDB */
@@ -14,6 +15,7 @@ var databaseConnection = mongoose.connect(config.mongodb);
 /* Models */
 var RedirectModel = new Redirect(databaseConnection);
 var ComparisonModel = new Comparison(databaseConnection);
+var DetailModel = new Detail(fdatabaseConnection);
 
 router.get('/', function(req, res) {
   return res.render('index', {
@@ -35,7 +37,7 @@ router.get('/redirect/:provider', RedirectModel.handleRequest.bind(RedirectModel
 
 /* API routes */
 router.post('/api/compare', ComparisonModel.handleRequest.bind(ComparisonModel));
-
+router.post('/api/detail', )
 
 
 module.exports = router;

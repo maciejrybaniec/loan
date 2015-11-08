@@ -21,6 +21,17 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'ui-rangeSlider'])
     $scope.providersLoad = false;
     $scope.compareTrigger = false;
 
+    $scope.toggleDetails = function(e) {
+     var dataRender = e.currentTarget.getAttribute('data-render');
+     if (!JSON.parse(dataRender)) {
+       console.log('sasa');
+     } else {
+       console.log('toogle class');
+     }
+
+    }
+
+
     /**
      * Called when user compare loan providers
      * @method onLoanCompare
@@ -34,7 +45,7 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'ui-rangeSlider'])
           'amount': $scope.amount.value,
           'firstTimeBorrow': $scope.firstTimeBorrow,
         };
-        
+
         $scope.compareTrigger = true;
         $scope.providersLoad = true;
         compareService.getLoanProviders(requestObject, $scope.onCompareReturn);
