@@ -15,7 +15,7 @@ var databaseConnection = mongoose.connect(config.mongodb);
 /* Models */
 var RedirectModel = new Redirect(databaseConnection);
 var ComparisonModel = new Comparison(databaseConnection);
-var DetailModel = new Detail(fdatabaseConnection);
+var DetailModel = new Detail(databaseConnection);
 
 router.get('/', function(req, res) {
   return res.render('index', {
@@ -37,7 +37,7 @@ router.get('/redirect/:provider', RedirectModel.handleRequest.bind(RedirectModel
 
 /* API routes */
 router.post('/api/compare', ComparisonModel.handleRequest.bind(ComparisonModel));
-router.post('/api/detail', )
+router.post('/api/detail', DetailModel.handleRequest.bind(DetailModel))
 
 
 module.exports = router;
