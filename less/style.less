@@ -191,12 +191,15 @@ body {
 }
 .bs-additional-label {
   font-weight: 300;
-  font-size: 9px;
+  font-size: 11px;
   padding: 6px 25px;
   cursor: pointer;
+  display: block;
+  text-align: center;
   color: @bs-additional-label-color;
   background: @bs-additional-label;
   @media (min-width: @bs-screen-sm-bootstrap) {
+    display: inline-block;
     font-size: 12px;
   }
   .animate(.2s);
@@ -206,7 +209,9 @@ body {
 }
 .bs-additional-label + .bs-additional-label {
   margin-left: 0;
+  margin-top: 10px;
   @media (min-width: @bs-screen-sm-bootstrap) {
+    margin-top: 0px;
     margin-left: 10px;
   }
 }
