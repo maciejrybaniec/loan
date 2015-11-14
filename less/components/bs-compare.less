@@ -45,7 +45,7 @@
       margin-right: 5px;
     }
     input[type="checkbox"]:checked:after {
-      background: url("../../img/mark.png");
+      background: url(../../img/mark.png);
       background-position: center;
       height: 20px;
       background-size: 100%;
@@ -290,6 +290,52 @@
   display: inline-block;
   position: absolute;
 }
+.bs-provider-details-table:first-of-type {
+  margin-top: 30px;
+}
+.bs-provider-details-table:last-of-type {
+  margin-bottom: 20px;
+}
+.bs-provider-details-table {
+  text-align: left;
+  font-weight: 300;
+  margin-top: 0;
+  @media (min-width: @bs-screen-sm-bootstrap) {
+    margin-top: 20px;
+    display: table;
+    table-layout: fixed;
+  }
+  .bs-provider-details-cell {
+    padding-left: 45px;
+    position: relative;
+    margin-bottom: 15px;
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      margin-bottom: 0;
+      padding-bottom: 10px;
+      display: table-cell;
+      width: 33.333333333%;
+    }
+    h6 {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: @bs-light-blue;
+      font-weight: 400;
+      line-height: 15px;
+      margin: 0 0 10px;
+      padding: 0;
+      @media (min-width: @bs-screen-md-bootstrap) {
+        font-size: 13px;
+      }
+    }
+    p {
+      font-size: 12px;
+      margin: 0;
+      @media (min-width: @bs-screen-md-bootstrap) {
+        font-size: 13px;
+      }
+    }
+  }
+}
 .bs-loan-provider {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -329,6 +375,9 @@
     @media (min-width: @bs-screen-sm-bootstrap) {
       font-size: 22px;
     }
+  }
+  .bs-total-value {
+    font-weight: 400;
   }
   & > div {
     margin-bottom: 20px;

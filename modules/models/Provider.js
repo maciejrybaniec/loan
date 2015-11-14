@@ -11,6 +11,6 @@ var ProviderSchema = new Schema({
    providerTelephone: String,
    providerLoanGiveTime: String,
    providerDatabases: Array,
-   openTime: String,
+   openTime: Array,
 });
 module.exports = mongoose.model('Providers', ProviderSchema);

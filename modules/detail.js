@@ -16,9 +16,10 @@ Detail.prototype = {
    */
   handleRequest: function(req, res) {
     Provider.findOne({
-      'name': req.params.provider,
+      'name': req.body.provider,
     }, function(err, doc) {
       if (err || doc === null) {
+        console.log(err, doc);
         res.status(500);
         res.json({});
         return false;

@@ -29,7 +29,23 @@
 <% if (headSectionData.loadAngular) { %>
   <script src="lib/js/angular.js" type="text/javascript"></script>
   <script src="lib/js/angular-slider.js" type="text/javascript"></script>
+  <script src="lib/js/angular-cookies.js" type="text/javascript"></script>
   <script src="lib/app.js" type="text/javascript"></script>
   <script src="lib/services/compareService.js" type="text/javascript"></script>
+  <script src="lib/services/providerService.js" type="text/javascript"></script>
   <script src="lib/main.js" type="text/javascript"></script>
+  <script src="lib/track.js" type="text/javascript"></script>
+  <div class="bs-cookie-info" ng-controller="TrackCtrl">
+    <div class="bs-cookie-law" ng-if="showCookieLaw">
+      <div class="col-xs-12">
+        <h6>Polityka Cookies</h6>
+        <p>Bankierski.pl wykorzystuje pliki cookie. Używamy informacji zapisanych za pomocą plików cookies w celu zapewnienia maksymalnej wygody w korzystaniu z naszego serwisu. Jeśli nie wyrażasz zgody, ustawienia dotyczące plików cookies możesz zmienić w swojej przeglądarce.</p>
+        <i class="fa fa-lg fa-times bs-close-cookies" ng-click="onCloseCookies()"></i>
+        <div class="text-center clearfix">
+          <span class="bs-button-sm bs-button-orange" ng-click="onAcceptCookies()">Zgadzam się</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <% } %>

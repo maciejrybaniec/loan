@@ -1,0 +1,36 @@
+<li class="bs-loan-provider col-xs-12" ng-class="visibleDetails[$index]" ng-repeat="provider in loanProviders">
+  <div class="col-xs-12 col-sm-3 col-md-3 bs-provider-logo">
+    <img alt="{{provider.provider}}" ng-src="img/providers/{{provider.provider}}.png" />
+  </div>
+  <div class="col-xs-4 col-sm-3 col-md-2">
+    <h5 class="bs-provider-label">rata</h5>
+    <span class="bs-provider-value bs-total-value">{{provider.total | number : 2 }} zł
+    </span>
+  </div>
+  <div class="col-xs-4 col-sm-3 col-md-2">
+    <h5 class="bs-provider-label">rrso</h5>
+    <span class="bs-provider-value" ng-if="!provider.rrso">b/d</span>
+    <span class="bs-provider-value" ng-if="provider.rrso">{{provider.rrso | number : 1 }}%</span>
+  </div>
+  <div class="col-xs-4 col-sm-3 col-md-2">
+    <h5 class="bs-provider-label">prowizja</h5>
+    <span class="bs-provider-value">{{provider.commission | number : 2 }} zł
+    </span>
+  </div>
+  <div class="col-xs-12 col-sm-4 col-sm-offset-8 col-md-offset-1 col-md-2 bs-button-box text-center">
+    <a class="bs-compare-button" href="/redirect/{{provider.provider}}" target="_blank" title="Sprawdź ofertę">
+      <span>sprawdź</span>
+      <span>kredyt</span>
+      <i class="fa fa-lg fa-angle-down"></i>
+    </a>
+  </div>
+  <div class="col-xs-12 bs-provider-additional-container">
+    <div class="bs-provider-additional clearfix">
+      <span class="bs-additional-label">Szczegóły na e-mail</span>
+      <span class="bs-additional-label bs-provider-details-button" data-provider="{{provider.provider}}" data-render="false" ng-click="toggleDetails($index, $event)">Szczegóły kredytu</span>
+      <section class="bs-provider-details" ng-if="provider.details">
+        <div ng-include="'lib/templates/provider-details.html'"></div>
+      </section>
+    </div>
+  </div>
+</li>
