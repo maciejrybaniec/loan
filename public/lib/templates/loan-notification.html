@@ -1,0 +1,22 @@
+<div class="bs-notification-fade"></div>
+<div class="bs-email-notification clearfix">
+  <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 bs-notification-box">
+    <h3 class="bs-header-break">Szczegóły na e-mail</h3>
+    <div class="col-xs-12 col-sm-4 bs-notification-image">
+      <img alt="{{notificationDetails.provider}}" ng-src="img/providers/{{notificationDetails.provider}}.png" />
+    </div>
+    <div class="col-xs-12 bs-notification-description">
+      <p>Wypełnij poniższy formularz i otrzymaj wszystkie potrzebne informację o pożyczce {{searchArguments.value}} zł na {{searchArguments.time}} dni w
+        <span>{{notificationDetails.name}}</span> prosto na swój adres e-mail.</p>
+    </div>
+    <section class="bs-notification-form col-xs-12 clearfix">
+      <div class="col-xs-12 col-sm-6">
+        <input type="text" ng-model="email" placeholder="Adres e-mail" />
+        <span class="bs-error" ng-if="notificationError">{{notificationErrorMessage}}</span>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="bs-button-sm bs-button-orange" ng-click="onSendMessage()">Wyślij</div>
+      </div>
+    </section>
+  </div>
+</div>

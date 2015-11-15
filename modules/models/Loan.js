@@ -7,6 +7,7 @@ var LoanSchema = new Schema({
   days: Number,
   firstTime: Boolean,
   provider: String,
+  name: String,
   rrso: Number,
   total: Number,
 });

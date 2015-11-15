@@ -11,6 +11,8 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
     $scope.firstTimeBorrow = false;
     $scope.providersLoad = false;
     $scope.compareTrigger = false;
+    $scope.showDetailsNotification = false;
+    $scope.notificationDetails = {};
 
     /**
      * Initialize default values for loan slider
@@ -28,6 +30,19 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
         maxValue: 100,
         minValue: 1,
       };
+    };
+    /**
+     * Handle provider details email notification
+     * {string} [index] element index
+     * @method onSendDetails
+     */
+    $scope.onSendDetails = function(index) {
+      $scope.notificationDetails = $scope.loanProviders[index];
+      $scope.showDetailsNotification = true;
+
+      $scope.email = '';
+      $scope.notificationError = false;
+      $scope.notificationErrorMessage = '';
     };
     /**
      * Handle provider details render
