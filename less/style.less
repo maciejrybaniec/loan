@@ -26,9 +26,15 @@ body {
 @bs-light-blue: #25a5b0;
 @bs-orange-hover: #f29719;
 @bs-shadow-color: #61c6c8;
+@bs-error: rgb(165, 28, 28);
 @bs-additional-label-color: #a09896;
 @bs-additional-label: #e9eaeb;
+@bs-input-border: #c2c2c2;
 @bs-subscribe-text: #616161;
+@bs-popup-background: #f8f8f8;
+@bs-close-notifications-border: #b7b7b7;
+@bs-close-notifications-icon: #414141;
+@bs-popup-border: #acacac;
 @bs-footer-link: #3e3e3e;
 @bs-border: #e3dfde;
 @bs-additional-label-hover: #ececec;
@@ -526,13 +532,32 @@ body {
   }
 }
 .bs-notification-fade {
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.65);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 99999;
+}
+.bs-close-notifications {
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+  border-radius: 50%;
+  background: @bs-white;
+  text-align: center;
+  border: solid 1px @bs-close-notifications-border;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  cursor: pointer;
+  i {
+    color: @bs-close-notifications-icon;
+    position: relative;
+    top: 1px;
+    left: 1px;
+  }
 }
 .bs-email-notification {
   position: fixed;
@@ -542,13 +567,22 @@ body {
   width: 100%;
   top: 80px;
   .bs-notification-box {
-    background: @bs-white;
-    .border-radius(3px);
+    position: relative;
+    background: @bs-popup-background;
+    border: solid 2px @bs-popup-border;
     h3 {
       text-transform: uppercase;
-      font-size: 15px;
+      color: @bs-light-blue;
+      border-top: solid 2px @bs-light-blue;
+      border-bottom: solid 2px @bs-light-blue;
+      font-weight: 600;
+      font-size: 18px;
+      margin-top: 35px;
       margin-bottom: 15px;
       padding: 10px 5px;
+      @media (min-width: @bs-screen-sm) {
+        font-size: 24px;
+      }
     }
     .bs-notification-image {
       text-align: center;
@@ -561,21 +595,54 @@ body {
         height: auto;
       }
     }
-    .bs-notification-description {
-      margin-top: 15px;
-    }
-    input {
+    input[type="text"] {
       width: 100%;
-      padding: 5px;
+      padding: 10px 20px;
+      font-size: 22px;
       font-weight: 300;
-      border: none;
+      border: solid 1px @bs-input-border;
       outline: none;
-      background: @bs-additional-label;
+      background: @bs-white;
+    }
+    .bs-notification-conditions {
+      input[type="checkbox"] {
+        top: 4px;
+        appearance: none;
+        -webkit-appearance: none;
+        outline: none;
+        margin: 0;
+      }
+      input[type="checkbox"]:after {
+        display: inline-block;
+        height: 15px;
+        content: '';
+        width: 15px;
+        border: solid 2px @bs-light-blue;
+      }
+      input[type="checkbox"]:checked:after {
+        background: @bs-light-blue url(../../img/mark.png);
+        background-position: center top;
+        height: 15px;
+        background-size: 100%;
+      }
+      label {
+        padding-left: 0;
+        font-size: 9px;
+        font-weight: 300;
+        span {
+          display: inline-block;
+          margin-left: 25px;
+        }
+      }
     }
     p {
       font-weight: 300;
       font-size: 13px;
-      line-height: 17px;
+      line-height: 16px;
+      @media (min-width: @bs-screen-sm) {
+        font-size: 14px;
+        line-height: 18px;
+      }
       span {
         font-weight: 400;
         color: @bs-light-blue;
@@ -585,12 +652,21 @@ body {
       padding-top: 10px;
       padding-bottom: 20px;
       .bs-button-orange {
+        padding: 10px 15px;
         text-transform: uppercase;
         cursor: pointer;
         color: @bs-white;
       }
     }
   }
+}
+.bs-error {
+  display: block;
+  padding: 4px 0;
+  text-align: left;
+  font-weight: 300;
+  font-size: 12px;
+  color: @bs-error;
 }
 @import 'components/angular-slider.less';
 @import 'components/bs-compare.less';

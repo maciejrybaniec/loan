@@ -2,8 +2,7 @@ var config = require('./../config'),
   Provider = require('./models/Provider');
 
 /* Detail module */
-function Detail(database) {
-  this.database = database;
+function Detail() {
   'use strict';
 }
 

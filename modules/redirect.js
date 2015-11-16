@@ -4,8 +4,7 @@ var config = require('./../config'),
 var viewMainTemplate = config.mainTemplate;
 
 /* Redirect module */
-function Redirect(database) {
-  this.database = database;
+function Redirect() {
   'use strict';
 }
 

@@ -3,8 +3,7 @@ var config = require('./../config'),
 
 
 /* Comparison module */
-function Comparison(database) {
-  this.database = database;
+function Comparison() {
   'use strict';
 }
 

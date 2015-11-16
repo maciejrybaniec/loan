@@ -23,6 +23,29 @@ angular.module('bsApp.provider-service', [])
       return deferred.promise;
     }
     /**
+     * Send email with loan details
+     * @param {string} [email] email
+     * @param {string} [provider] provider
+     * @method sendDetailsNotification
+     */
+    function sendDetailsNotification(email, provider) {
+      var deferred = $q.defer();
+      $http({
+        method: 'POST',
+        data: {
+          'email': email,
+          'provider': provider,
+        },
+        url: appConfig.apiUrl + '/notification'
+      }).then(function(response) {
+        deferred.resolve(response.data);
+      }, function(error) {
+        deferred.reject(error);
+      });
+
+      return deferred.promise;
+    }
+    /**
      * Find provider based on passed attributes
      * @param {object} [array] object with providers
      * @param {string} [attribute] attribute
@@ -36,9 +59,9 @@ angular.module('bsApp.provider-service', [])
         }
       }
     }
-
     return ({
       'getProviderDetail': getProviderDetail,
+      'sendDetailsNotification': sendDetailsNotification,
       'findProvider': findProvider,
     });
   }]);

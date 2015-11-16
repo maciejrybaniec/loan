@@ -13,7 +13,19 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
     $scope.compareTrigger = false;
     $scope.showDetailsNotification = false;
     $scope.notificationDetails = {};
+    /**
+     * Initialize default values for popup notifications
+     * @method setDefaultNotificationsValue
+     */
+    $scope.setDefaultNotificationsValue = function() {
+      $scope.notifications = {
+        conditions: false,
+        email: '',
+      };
 
+      $scope.allowFormSend = true;
+      $scope.notificationError = {};
+    };
     /**
      * Initialize default values for loan slider
      * @method setDefaultSliderValues
@@ -38,11 +50,54 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
      */
     $scope.onSendDetails = function(index) {
       $scope.notificationDetails = $scope.loanProviders[index];
+      $scope.setDefaultNotificationsValue();
       $scope.showDetailsNotification = true;
+    };
+    /**
+     * Called when user want to close popup notifications
+     * @method onClosePopup
+     */
+    $scope.onClosePopup = function() {
+      $scope.showDetailsNotification = false;
+    };
+    $scope.onSendMessage = function() {
+      $scope.notificationError = {};
+      if ($scope.allowFormSend && $scope.isValidPopupForm()) {
+        var promise = providerService.sendDetailsNotification($scope.notifications.email, $scope.notificationDetails.provider);
+        $scope.allowFormSend = false;
+        promise.then(function(responseData) {
+          
+          $scope.showDetailsNotification = false;
+          $scope.allowFormSend = true;
+        });
+      }
+    };
+    /**
+     * Validate popup form
+     * @method isValidPopupForm
+     */
+    $scope.isValidPopupForm = function() {
+      var regex = $scope.regexMail();
+      var isValid = true;
 
-      $scope.email = '';
-      $scope.notificationError = false;
-      $scope.notificationErrorMessage = '';
+      if ($scope.notifications.email.length === 0 || regex.exec($scope.notifications.email) === null) {
+        $scope.notificationError.email = 'Wprowadzono niepoprawny adres e-mail';
+        isValid = false;
+      }
+
+      if ($scope.notifications.conditions === false) {
+        $scope.notificationError.conditions = 'Musisz zaakceptować powyższe warunki użytkowania';
+        isValid = false;
+      }
+
+      return isValid;
+    };
+    /**
+     * Return regex for email
+     * @method regexMail
+     */
+    $scope.regexMail = function() {
+      return /(?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
     };
     /**
      * Handle provider details render
@@ -169,4 +224,5 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
     };
 
     $scope.setDefaultSliderValues();
+    $scope.setDefaultNotificationsValue();
   }]);
