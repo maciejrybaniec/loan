@@ -21,7 +21,9 @@
     "accounting": "~0.4.1",
     "request": "~2.62.0",
     "moment": "~2.10.6",
-    "mongoose": "~4.1.9"
+    "mongoose": "~4.1.9",
+    "nodemailer": "~1.10.0",
+    "q": "~1.4.1"
   },
   "dependencies": {
     "strings-parser-date": "~0.1.1"

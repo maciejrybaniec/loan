@@ -1,4 +1,11 @@
-angular.module('bsApp', ['bsApp.main', 'bsApp.track','bsApp.compare-service', 'ui-rangeSlider'])
+angular.module('bsApp', [
+    'bsApp.main',
+    'bsApp.track',
+    'bsApp.notification',
+    'bsApp.compare-service',
+    'ui-rangeSlider',
+    'ui-notification',
+  ])
   .constant('appConfig', {
-    'apiUrl': 'http://localhost:8000/api',
+    'apiUrl': 'http://macryb.usermd.net/api',
   });

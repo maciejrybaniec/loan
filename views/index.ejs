@@ -4,6 +4,9 @@
   <body <% if (headSectionData.loadAngular) { %> ng-app="bsApp" ng-cloak <% } %> data-compare="false">
       <%- include('header.ejs') %>
       <%- include(template, {'templateData': templateData }) %>
+       <% if (headSectionData.loadAngular) { %>
+         <div class="bs-notification-messages" ng-controller="NotificationCtrl"></div>
+       <% } %>
   <%- include('common/footer.ejs', {'headSectionData': headSectionData }) %>
   </body>
 </html>

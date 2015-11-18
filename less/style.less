@@ -660,6 +660,32 @@ body {
     }
   }
 }
+.bs-notifications-message-box {
+  @bs-success: rgb(70, 190, 70);
+  position: fixed;
+  width: 100%;
+  z-index: 99999;
+  text-align: right;
+  bottom: 0;
+  margin: 0;
+  padding: 0 15px;
+  li {
+    max-width: 300px;
+    display: inline-block;
+    text-align: left;
+    border-radius: 3px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    float: right;
+    clear: both;
+    color: @bs-white;
+    font-weight: 300;
+    .animationPlay(fadeIn, 1.3s);
+    &.bs-success {
+      background: @bs-success;
+    }
+  }
+}
 .bs-error {
   display: block;
   padding: 4px 0;
@@ -669,6 +695,7 @@ body {
   color: @bs-error;
 }
 @import 'components/angular-slider.less';
+@import 'components/angular-notifications.less';
 @import 'components/bs-compare.less';
 @import 'components/bs-testimonials.less';
 @import 'components/loader.less';

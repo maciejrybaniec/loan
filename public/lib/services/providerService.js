@@ -28,13 +28,14 @@ angular.module('bsApp.provider-service', [])
      * @param {string} [provider] provider
      * @method sendDetailsNotification
      */
-    function sendDetailsNotification(email, provider) {
+    function sendDetailsNotification(email, provider, id) {
       var deferred = $q.defer();
       $http({
         method: 'POST',
         data: {
           'email': email,
           'provider': provider,
+          'id': id,
         },
         url: appConfig.apiUrl + '/notification'
       }).then(function(response) {
