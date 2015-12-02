@@ -37,7 +37,7 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
        */
       $scope.setDefaultSliderValues = function() {
         $scope.amount = {
-          value: 1000,
+          value: 700,
           maxValue: 10000,
           minValue: 100,
         };
@@ -202,7 +202,9 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
         } else {
           $scope.searchArguments.value = $scope.amount.value;
           $scope.searchArguments.time = $scope.time.value;
-          $scope.loanProviders = response;
+          $scope.loanProviders = response.sort(function(a, b) {
+            return a.total - b.total;
+          });
         }
       };
       /**
