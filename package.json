@@ -24,7 +24,8 @@
     "mongoose": "~4.1.9",
     "nodemailer": "~1.10.0",
     "q": "~1.4.1",
-    "email-templates": "~2.0.1"
+    "email-templates": "~2.0.1",
+    "nodemailer-smtp-transport": "~1.0.4"
   },
   "dependencies": {
     "strings-parser-date": "~0.1.1"

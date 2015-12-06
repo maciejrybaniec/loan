@@ -7,13 +7,16 @@ var config = require('./../config'),
   fs = require('fs'),
   q = require('q');
 
-var transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: 'projekt.wpc.uek@gmail.com',
-    pass: 'projektuek'
-  }
-});
+  var smtpTransport = require('nodemailer-smtp-transport');
+  var transporter = nodemailer.createTransport(smtpTransport({
+      host: 'mail6.mydevil.net',
+      port: 25,
+      auth: {
+          user: 'macryb@macryb.usermd.net',
+          pass: '7*@z#cR#uJoY$#gRG@mN'
+      }
+  }));
+
 
 /* Notification module */
 function Notification() {
