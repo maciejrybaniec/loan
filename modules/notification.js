@@ -2,6 +2,9 @@ var config = require('./../config'),
   nodemailer = require('nodemailer'),
   Provider = require('./models/Provider'),
   Loan = require('./models/Loan'),
+  EmailTemplate = require('email-templates').EmailTemplate,
+  path = require('path'),
+  fs = require('fs'),
   q = require('q');
 
 var transporter = nodemailer.createTransport({
@@ -37,8 +40,6 @@ Notification.prototype = {
     }
 
     var getLoanData = this.getLoanData(req.body.id);
-    //  this.saveNotification(req.body.email, req.body.provider);
-
     getLoanData.then(function(document) {
         $this.loanData = document;
         return $this.getProviderDetail(req.body.provider);
@@ -65,22 +66,34 @@ Notification.prototype = {
     var $this = this,
       defer = q.defer();
 
-    /* Setup email options */
-    var mailOptions = {
-      from: 'Bankierski.pl <projekt.wpc.uek@gmail.com>',
-      to: email,
-      subject: 'Bankierski.pl - oferta pożyczkodawcy ' + $this.loanData.name,
-      text: 'Test',
-      html: 'Test',
-    };
+    var templateDir = path.join('views', 'emails'),
+      notificationEmail = new EmailTemplate(templateDir);
 
-    transporter.sendMail(mailOptions, function(error, info) {
+    /* Setup email options */
+    notificationEmail.render({
+      'loanData': $this.loanData,
+      'provider': $this.provider,
+    }, function(error, result) {
       if (error) {
         defer.reject(false);
-      } else {
-        console.log('Message sent: ' + info.response);
-        defer.resolve(true);
+        return false;
       }
+
+      var mailOptions = {
+        from: 'Bankierski.pl <projekt.wpc.uek@gmail.com>',
+        to: email,
+        subject: 'Bankierski.pl - oferta pożyczkodawcy ' + $this.loanData.name,
+        html: result.html,
+      };
+
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          defer.reject(false);
+        } else {
+          console.log('Message sent: ' + info.response);
+          defer.resolve(true);
+        }
+      });
     });
 
     return defer.promise;
