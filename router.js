@@ -35,6 +35,14 @@ router.get('/contact', function(req, res) {
   });
 });
 
+router.get('/conditions', function(req, res) {
+  return res.render('index', {
+    'template': 'conditions' + viewMainTemplate,
+    'headSectionData': config.views.conditions,
+    'templateData': {},
+  });
+});
+
 router.get('/redirect/:provider', RedirectModel.handleRequest.bind(RedirectModel));
 
 /* API routes */

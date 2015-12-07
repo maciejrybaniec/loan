@@ -12,8 +12,8 @@ var config = require('./../config'),
       host: 'mail6.mydevil.net',
       port: 25,
       auth: {
-          user: 'macryb@macryb.usermd.net',
-          pass: '7*@z#cR#uJoY$#gRG@mN'
+          user: 'kontakt@bankierski.pl',
+          pass: 'Maciej4586'
       }
   }));
 
@@ -83,7 +83,7 @@ Notification.prototype = {
       }
 
       var mailOptions = {
-        from: 'Bankierski.pl <projekt.wpc.uek@gmail.com>',
+        from: 'Bankierski.pl <kontakt@bankierski.pl>',
         to: email,
         subject: 'Bankierski.pl - oferta pożyczkodawcy ' + $this.loanData.name,
         html: result.html,

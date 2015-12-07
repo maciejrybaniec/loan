@@ -9,6 +9,10 @@ module.exports = {
       'title': 'Contact',
       'loadAngular': false,
     },
+    conditions: {
+      'title': 'Bankierski - regulamin serwisu',
+      'loadAngular': false,
+    },
     redirect: {
       'title': 'Bankierski - przekierowanie',
       'loadAngular': false,

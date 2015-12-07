@@ -17,6 +17,7 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
       $scope.providersLoad = false;
       $scope.compareTrigger = false;
       $scope.showDetailsNotification = false;
+      $scope.isFormPending = false;
       $scope.notificationDetails = {};
       /**
        * Initialize default values for popup notifications
@@ -44,7 +45,7 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
 
         $scope.time = {
           value: 15,
-          maxValue: 100,
+          maxValue: 60,
           minValue: 1,
         };
       };
@@ -68,6 +69,7 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
       $scope.onSendMessage = function() {
         $scope.notificationError = {};
         if ($scope.allowFormSend && $scope.isValidPopupForm()) {
+          $scope.isFormPending = true;
           var promise = providerService.sendDetailsNotification($scope.notifications.email, $scope.notificationDetails.provider, $scope.notificationDetails._id);
           $scope.allowFormSend = false;
           promise.then(function(responseData) {
@@ -76,6 +78,7 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
               message: 'Wiadomość została wysłana na Twoją skrzynkę e-mail',
             };
 
+            $scope.isFormPending = false;
             $rootScope.$broadcast('notification', notification);
 
             $scope.showDetailsNotification = false;
@@ -85,6 +88,8 @@ angular.module('bsApp.main', ['bsApp.compare-service', 'bsApp.provider-service',
               type: 'error',
               message: 'Wysyłanie wiadomości zakończyło się niepowodzeniem',
             };
+
+            $scope.isFormPending = false;
             $rootScope.$broadcast('notification', notification);
             $scope.showDetailsNotification = false;
             $scope.allowFormSend = true;

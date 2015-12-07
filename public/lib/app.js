@@ -7,5 +7,5 @@ angular.module('bsApp', [
     'ui-notification',
   ])
   .constant('appConfig', {
-    'apiUrl': 'http://macryb.usermd.net/api',
+    'apiUrl': 'http://bankierski.pl/api',
   });
