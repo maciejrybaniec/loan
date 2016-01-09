@@ -3,6 +3,7 @@ angular.module('bsApp', [
     'bsApp.track',
     'bsApp.notification',
     'bsApp.compare-service',
+    'bsApp.RatingDirective',
     'ui-rangeSlider',
     'ui-notification',
   ])

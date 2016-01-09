@@ -26,6 +26,9 @@
   </div>
   <div class="col-xs-12 bs-provider-additional-container">
     <div class="bs-provider-additional clearfix">
+      <span class="bs-loan-rating-box">
+      <rating-element rating="{{provider.rating}}"></rating-element>
+      </span>
       <span class="bs-additional-label" ng-click="onSendDetails($index)">Szczegóły na e-mail</span>
       <span class="bs-additional-label bs-provider-details-button" data-provider="{{provider.provider}}" data-render="false" ng-click="toggleDetails($index, $event)">Szczegóły kredytu</span>
       <section class="bs-provider-details" ng-if="provider.details">

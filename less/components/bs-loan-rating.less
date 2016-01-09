@@ -1,0 +1,37 @@
+#bs-compare {
+  .bs-loan-rating-box {
+    text-align: left;
+    display: block;
+    margin-bottom: 10px;
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      margin-bottom: 0;
+      display: inline-block;
+      float: left;
+    }
+    .bs-loan-rating {
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+    .bs-stars-mask {
+      position: relative;
+      display: inline-block;
+      height: 18px;
+      width: 100px;
+      top: 2px;
+      .bs-rating-fade {
+        display: inline-block;
+        height: 18px;
+        width: 100px;
+        background: url(../img/stars.png) no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .bs-rating-level {
+        display: block;
+        height: 18px;
+        background: @bs-light-blue;
+      }
+    }
+  }
+}

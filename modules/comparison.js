@@ -1,6 +1,7 @@
 var config = require('./../config'),
-  Loan = require('./models/Loan');
-
+  q = require('q'),
+  Loan = require('./models/Loan'),
+  Provider = require('./models/Provider');
 
 /* Comparison module */
 function Comparison() {
@@ -16,37 +17,41 @@ Comparison.prototype = {
    */
   handleRequest: function(req, res) {
     var $this = this;
+    var errors = this.validateComparisonArguments(req.body);
 
-    this.validateComparisonArguments(req.body, function(errors) {
+    if (errors.length > 0) {
+      res.status(500);
+      res.json({
+        'errors': errors,
+      });
+      return false;
+    }
 
-      if (errors.length > 0) {
-        res.status(500);
-        res.json({
-          'errors': errors,
-        });
-        return false;
-      }
+    var promise = this.getLoanConditions(req.body);
 
-      $this.getLoanConditions(req.body, function(error, comparisonData) {
-        if (error) {
-          res.status(500);
-          res.json({
-            'error': 'e_database_error',
-          });
-          return false;
-        }
+    promise
+      .then(function(loans) {
+        return $this.getProvidersRating(loans);
+      })
+      .then(function(providers) {
+        console.log(providers);
 
         res.status(200);
-        res.json(comparisonData);
+        res.json(providers);
+      })
+      .catch(function(error) {
+        res.status(500);
+        res.json({
+          'errors': error,
+        });
       });
-    });
   },
   /**
    * Validate arguments for comparison
    * @param {object} [arguments] request arguments
    * @method validateComparisonArguments
    */
-  validateComparisonArguments: function(arguments, done) {
+  validateComparisonArguments: function(arguments) {
     var errors = [];
 
     /**
@@ -95,28 +100,66 @@ Comparison.prototype = {
     validateTime(arguments.time);
     validateFirstTimeBorrow(arguments.firstTimeBorrow);
 
-    done(errors);
+    return errors;
   },
-
   /**
    * Get loan conditions for each provider
-   * @param {object} [data] request arguments
-   * @param {function} [callback] callback function
+   * @param {object} [query] request arguments
    * @method getLoanConditions
    */
-  getLoanConditions: function(data, callback) {
+  getLoanConditions: function(query) {
+    var $this = this;
+    var defer = q.defer();
+
     Loan.find({
-      'days': data.time,
-      'amount': data.amount,
-      'firstTime': data.firstTimeBorrow,
-    }, function(err, docs) {
-      if (err) {
-        callback(true);
-        return false;
-      }
-      callback(false, docs);
-    });
+        'days': query.time,
+        'amount': query.amount,
+        'firstTime': query.firstTimeBorrow,
+      })
+      .exec(function(err, docs) {
+        if (err) {
+          return defer.reject({
+            name: 'compare',
+            message: 'e_compare',
+          });
+        }
+        defer.resolve(docs);
+      });
+
+    return defer.promise;
   },
+  /**
+   * Get rating value for loan provider
+   * @param {object} [loans] Array with Loan models
+   * @method getProvidersRating
+   */
+  getProvidersRating: function(loans) {
+    var $this = this;
+    var defer = q.defer();
+    var loansLength = loans.length;
+    var iterator = 0;
+    var ratedLoans = [];
+
+    loans.forEach(function(loan) {
+
+      Provider.findOne({
+          'name': loan.provider,
+        }, {
+          'rating': true,
+        })
+        .exec(function(err, doc) {
+          loan.rating = !err ? doc.rating : 0;
+          ratedLoans.push(loan);
+          iterator++;
+
+          if (iterator === loansLength) {
+            defer.resolve(ratedLoans);
+          }
+        });
+    });
+
+    return defer.promise;
+  }
 }
 
 module.exports = Comparison;

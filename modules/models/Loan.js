@@ -1,6 +1,8 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
+var Provider = require('./Provider');
+
 var LoanSchema = new Schema({
   amount: Number,
   commission: Number,
@@ -10,5 +12,6 @@ var LoanSchema = new Schema({
   name: String,
   rrso: Number,
   total: Number,
+  rating: Number,
 });
 module.exports = mongoose.model('Loans', LoanSchema);
