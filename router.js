@@ -10,6 +10,8 @@ var Detail = require('./modules/detail');
 var Notification = require('./modules/notification');
 var viewMainTemplate = config.mainTemplate;
 
+var providerAPI = require('./modules/providerAPI');
+
 /* Connect to MongoDB */
 var databaseConnection = mongoose.connect(config.mongodb);
 
@@ -26,6 +28,24 @@ router.get('/', function(req, res) {
     'templateData': {},
   });
 });
+
+
+
+router.get('/provider/:provider', function(req, res) {
+  var promise = providerAPI.getProviderDetails(req.params.provider);
+  promise
+    .then(function(provider) {
+      console.log(provider);
+      return res.render('index', {
+        'template': 'provider' + viewMainTemplate,
+        'headSectionData': config.views.provider,
+        'templateData': {
+          'provider': provider,
+        },
+      });
+    });
+});
+
 
 router.get('/contact', function(req, res) {
   return res.render('index', {

@@ -660,6 +660,11 @@ body {
     }
   }
 }
+.bs-footer-law {
+  color: @bs-white;
+  font-weight: 300;
+  font-size: 9px;
+}
 .bs-notifications-message-box {
   @bs-success: rgb(70, 190, 70);
   position: fixed;
@@ -716,6 +721,37 @@ body {
       font-weight: 300;
       font-size: 13px;
       line-height: 21px;
+    }
+  }
+}
+.bs-provider-page {
+  .bs-provider-border {
+    overflow: hidden;
+    border: solid 1px @bs-gray;
+    margin: 10px 0;
+    padding: 15px 10px;
+  }
+  .bs-loan-rating-box {
+    margin-top: 20px;
+  }
+  figure {
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+  .bs-header-detail {
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+  }
+  .bs-provider-description {
+    margin-top: 15px;
+    font-weight: 300;
+    @media (min-width: @bs-screen-sm) {
+      margin-top: 0;
     }
   }
 }

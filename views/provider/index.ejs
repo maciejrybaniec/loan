@@ -1,0 +1,66 @@
+<section class="container bs-provider-page">
+  <div class="col-xs-12 bs-page-box">
+    <div class="bs-provider-border">
+      <h3 class="col-xs-12 bs-header-detail">Informacje ogólne</h3>
+      <figure class="col-xs-12 col-sm-3">
+      <img src="/img/providers/<%= templateData.provider.name %>.png" alt="<%= templateData.provider.name %>">
+     </figure>
+     <div class="bs-provider-description col-xs-12 col-sm-9">
+       <p><%= templateData.provider.description %></p>
+     </div>
+     <div class="col-xs-12 bs-loan-rating-box">
+        <rating-element rating="<%= templateData.provider.rating %>"></rating-element>
+    </div>
+     <div class="col-xs-12">
+       <div class="bs-provider-details-table">
+         <div class="bs-provider-details-cell">
+           <i class="details-sprite bs-icon-04"></i>
+           <h6>Telefon kontaktowy</h6>
+           <p><%= templateData.provider.providerTelephone %></p>
+         </div>
+         <div class="bs-provider-details-cell">
+           <i class="details-sprite bs-icon-05"></i>
+           <h6>Przelew środków na twoje konto</h6>
+           <p><%= templateData.provider.loanReceiveTime %></p>
+         </div>
+         <div class="bs-provider-details-cell">
+           <i class="details-sprite bs-icon-06"></i>
+           <h6>czas rozpatrywania wniosku</h6>
+           <p><%= templateData.provider.providerLoanGiveTime %></p>
+         </div>
+       </div>
+       <div class="bs-provider-details-table">
+         <div class="bs-provider-details-cell">
+           <i class="details-sprite bs-icon-07"></i>
+           <h6>Weryfikowane bazy</h6>
+           <p class="bs-comma-separate">
+             <% templateData.provider.providerDatabases.forEach(function(database) { %>
+             <span><%= database %></span>
+             <% }); %>
+           </p>
+         </div>
+         <div class="bs-provider-details-cell">
+           <i class="details-sprite bs-icon-08"></i>
+           <h6>Wydłużenie spłaty</h6>
+           <p><%= templateData.provider.extendPaidTime %></p>
+         </div>
+         <div class="bs-provider-details-cell">
+           <i class="details-sprite bs-icon-09"></i>
+           <h6>Co się dzieje gdy nie spłacasz?</h6>
+           <p><%= templateData.provider.tardinessCost %></p>
+         </div>
+       </div>
+     </div>
+    </div>
+  </div>
+  <h3 class="bs-header-detail clearfix">Wyraź swoją opinię</h3>
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = '//bankierski.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+</section>

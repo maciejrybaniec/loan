@@ -1,6 +1,10 @@
 module.exports = {
   mainTemplate: '/index.ejs',
   views: {
+    provider: {
+      'title': 'Bankierski - wiarygodna porównywarka',
+      'loadAngular': true,
+    },
     main: {
       'title': 'Bankierski - wiarygodna porównywarka',
       'loadAngular': true,

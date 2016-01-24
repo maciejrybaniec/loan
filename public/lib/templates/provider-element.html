@@ -1,6 +1,8 @@
 <li class="bs-loan-provider col-xs-12" ng-class="visibleDetails[$index]" ng-repeat="provider in loanProviders">
   <div class="col-xs-12 col-sm-3 col-md-3 bs-provider-logo">
-    <img alt="{{provider.provider}}" ng-src="img/providers/{{provider.provider}}.png" />
+    <a href="/provider/{{provider.provider}}" title="{{provider.provider}}">
+      <img alt="{{provider.provider}}" ng-src="img/providers/{{provider.provider}}.png" />
+    </a>
   </div>
   <div class="col-xs-4 col-sm-3 col-md-2">
     <h5 class="bs-provider-label">rata</h5>
