@@ -34,8 +34,6 @@ Comparison.prototype = {
         return $this.getProvidersRating(loans);
       })
       .then(function(providers) {
-        console.log(providers);
-
         res.status(200);
         res.json(providers);
       })
@@ -139,6 +137,10 @@ Comparison.prototype = {
     var loansLength = loans.length;
     var iterator = 0;
     var ratedLoans = [];
+
+    if (loansLength === 0) {
+      defer.resolve([]);
+    }
 
     loans.forEach(function(loan) {
 
