@@ -1,0 +1,40 @@
+.breadcrumbs {
+  @breadcrumb-link: #B4B4B4;
+  @breadcrumb-link-active: #25a5b0;
+  @breadcrumb-breaker: #2c3f50;
+
+  margin-bottom: 10px;
+
+  font-size: 12px;
+  font-weight: 300;
+
+  &__list {
+    i {
+      color: @breadcrumb-breaker;
+    }
+
+    &__item {
+      display: inline-block;
+
+      &--active {
+        display: inline-block;
+        a {
+          color: @breadcrumb-link-active;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+
+      a {
+        color: @breadcrumb-link;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+
+}

@@ -13,6 +13,10 @@ module.exports = {
       'title': 'Contact',
       'loadAngular': false,
     },
+    about: {
+      'title': 'Bankierski - o nas',
+      'loadAngular': true,
+    },
     conditions: {
       'title': 'Bankierski - regulamin serwisu',
       'loadAngular': false,

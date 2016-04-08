@@ -5,6 +5,6 @@ angular.module('bsApp.RatingDirective', [])
       link: function(scope, element, attrs) {
         scope.rating = attrs.rating;
       },
-      templateUrl: '/lib/templates/rating-element.html'
+      templateUrl: '/assets/templates/rating-element.html'
     };
   })

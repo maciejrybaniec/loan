@@ -1,0 +1,216 @@
+.provider {
+  @provider-border: #E9E9E9;
+  @provider-header: #555;
+  @provider-blue: #25a5b0;
+  @popular-provider-link: #333;
+  @popular-provider-link-hover: #fff;
+  @popular-provider: #EBEBEB;
+  @popular-provider-hover: #f29719;
+  @provider-advertisment: #f99c1c;
+  @provider-button: #2c3f50;
+  @provider-button-color: #fff;
+  @provider-button-color-hover: #f1f1f1;
+
+
+  margin-top: 30px;
+  font-family: Montserrat, sans-serif;
+
+  &--text {
+    font-size: 13px;
+    font-weight: 300;
+
+    color: @provider-header;
+  }
+
+  &__redirect {
+    padding: 15px 0;
+    a {
+      display: block;
+      padding: 10px 5px;
+      text-transform: uppercase;
+
+      background: @provider-button;
+      color: @provider-button-color;
+      .animate(.2s);
+      .border-radius(4px);
+
+      &:hover {
+        color: @provider-button-color-hover;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__ad {
+    margin: 0;
+    padding: 0;
+    list-style-position: inside;
+    list-style-type:square;
+
+    li {
+      font-weight: 300;
+      padding-left: 6px;
+      font-size: 12px;
+      margin-bottom: 15px;
+
+      strong {
+        font-size: 13px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  &__loans {
+    list-style: none;
+    padding: 0;
+
+    &__item {
+      padding: 15px 0;
+      margin-bottom: 15px;
+
+      border-bottom: dashed 1px @provider-border;
+
+      &--label {
+        text-transform: uppercase;
+
+        font-size: 12px;
+        font-weight: 300;
+
+        color: @provider-blue;
+      }
+    }
+  }
+
+  aside {
+    margin-top: 30px;
+
+    @media (min-width: @bs-screen-sm-bootstrap) {
+      margin: 0;
+    }
+  }
+
+  &__details {
+    margin-top: 30px;
+
+    &__header {
+      padding-bottom: 15px;
+      border-bottom: solid 1px @provider-border;
+
+      h3 {
+        margin: 0;
+        padding: 0 15px;
+
+        font-size: 18px;
+        color: @provider-header;
+
+        &.blue {
+          color: @provider-blue;
+        }
+      }
+    }
+  }
+
+  &__popular {
+    &__list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      &__item {
+        display: inline-block;
+        a {
+          margin-bottom: 4px;
+          display: inline-block;
+          font-weight: 300;
+          font-size: 13px;
+          padding: 3px 6px;
+
+          background: @popular-provider;
+          color: @popular-provider-link;
+          text-decoration: none;
+          .border-radius(3px);
+          .animate(.2s);
+
+          &:hover {
+            color: @popular-provider-link-hover;
+            background: @popular-provider-hover;
+          }
+        }
+      }
+    }
+  }
+
+  &--sidebar {
+    margin-top: 30px;
+
+    .bs-loan-rating-box {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  &__sidebar {
+
+    &--header {
+      margin: 0 -15px 15px;
+      padding-bottom: 15px;
+      text-align: left;
+
+      border-bottom: solid 1px @provider-border;
+
+      h3 {
+        margin: 0;
+        padding: 0 15px;
+        font-size: 15px;
+        color: @provider-header;
+
+        &.orange {
+          color: @provider-advertisment;
+        }
+      }
+    }
+  }
+
+  &__box {
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.24);
+  }
+
+  &__figure {
+    margin-bottom: 15px;
+    text-align: center;
+
+    img {
+      max-width: 180px;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__rating {
+    display: inline-block;
+
+    &--text {
+      margin-top: 5px;
+      display: inline-block;
+
+      font-size: 20px;
+      font-weight: 300;
+    }
+  }
+
+  &__header {
+    text-align: center;
+    border-top: solid 1px @provider-border;
+
+    h2 {
+      color: @provider-header;
+      padding: 15px 15px 0;
+      margin: 0;
+
+      font-size: 16px;
+    }
+  }
+
+
+}

@@ -1,60 +1,80 @@
-<section class="container bs-provider-page">
-  <div class="col-xs-12 bs-page-box">
-    <div class="bs-provider-border">
-      <h3 class="col-xs-12 bs-header-detail">Informacje ogólne</h3>
-      <figure class="col-xs-12 col-sm-3">
-      <img src="/img/providers/<%= templateData.provider.name %>.png" alt="<%= templateData.provider.name %>">
-     </figure>
-     <div class="bs-provider-description col-xs-12 col-sm-9">
-       <p><%= templateData.provider.description %></p>
-     </div>
-     <div class="col-xs-12 bs-loan-rating-box">
-        <rating-element rating="<%= templateData.provider.rating %>"></rating-element>
+<section class="provider container">
+  <div class="row">
+
+    <%- include('breadcrumbs.ejs', {'provider': templateData.provider }) %>
+
+    <div class="col-xs-12 col-sm-8 col-md-9">
+      <%- include('details.ejs') %>
+
+      <div class="provider__box provider__details">
+        <header class="provider__details__header row">
+          <h3>Wyraź swoją opinię</h3>
+        </header>
+        <div id="disqus_thread"></div>
+      </div>
     </div>
-     <div class="col-xs-12">
-       <div class="bs-provider-details-table">
-         <div class="bs-provider-details-cell">
-           <i class="details-sprite bs-icon-04"></i>
-           <h6>Telefon kontaktowy</h6>
-           <p><%= templateData.provider.providerTelephone %></p>
-         </div>
-         <div class="bs-provider-details-cell">
-           <i class="details-sprite bs-icon-05"></i>
-           <h6>Przelew środków na twoje konto</h6>
-           <p><%= templateData.provider.loanReceiveTime %></p>
-         </div>
-         <div class="bs-provider-details-cell">
-           <i class="details-sprite bs-icon-06"></i>
-           <h6>czas rozpatrywania wniosku</h6>
-           <p><%= templateData.provider.providerLoanGiveTime %></p>
-         </div>
-       </div>
-       <div class="bs-provider-details-table">
-         <div class="bs-provider-details-cell">
-           <i class="details-sprite bs-icon-07"></i>
-           <h6>Weryfikowane bazy</h6>
-           <p class="bs-comma-separate">
-             <% templateData.provider.providerDatabases.forEach(function(database) { %>
-             <span><%= database %></span>
-             <% }); %>
-           </p>
-         </div>
-         <div class="bs-provider-details-cell">
-           <i class="details-sprite bs-icon-08"></i>
-           <h6>Wydłużenie spłaty</h6>
-           <p><%= templateData.provider.extendPaidTime %></p>
-         </div>
-         <div class="bs-provider-details-cell">
-           <i class="details-sprite bs-icon-09"></i>
-           <h6>Co się dzieje gdy nie spłacasz?</h6>
-           <p><%= templateData.provider.tardinessCost %></p>
-         </div>
-       </div>
-     </div>
-    </div>
+
+    <aside class="col-xs-12 col-sm-4 col-md-3">
+      <div class="provider__box">
+        <figure class="provider__figure">
+          <img src="/img/providers/<%= templateData.provider.name %>.png" alt="<%= templateData.provider.title %>">
+        </figure>
+          <header class="row provider__header">
+            <h2><%= templateData.provider.title %></h2>
+          </header>
+      </div>
+
+      <div class="provider__box provider--sidebar text-center clearfix">
+        <header class="provider__sidebar--header">
+          <h3>Informacje ogólne</h3>
+        </header>
+
+        <p class="text-left provider--text"><%= templateData.provider.description %></p>
+        <div class="provider__redirect">
+          <a href="/redirect/<%= templateData.provider.name %>" target="_blank" rel="nofollow" title="Złóż wniosek">Złóż wniosek</a>
+        </div>
+
+        <div class="bs-loan-rating-box">
+          <rating-element class="provider__rating" rating="<%= templateData.provider.rating %>"></rating-element>
+        </div>
+        <span class="provider__rating--text">
+          <%= templateData.provider.rating %> / 5
+        </span>
+      </div>
+
+      <div class="provider__box provider--sidebar clearfix">
+        <header class="provider__sidebar--header">
+          <h3>Dlaczego Bankierski.pl?</h3>
+        </header>
+        <ul class="provider__ad">
+          <li><strong>Sprawdzony kalkulator kredytowy</strong>, który codziennie pomaga użytkownikom w znalezieniu najtańszej pożyczki.</li>
+          <li><strong>Bank odmówił Ci gotówki?</strong><br/>Wykorzystaj naszą porównywarkę, aby znaleźć najkorzystniejszą ofertę spośród setek chwilówek.</li>
+          <li><strong>Szybka gotówka</strong><br/>W kilka sekund porównaj oferty popularnych pożyczkodawców.</li>
+        </ul>
+      </div>
+
+      <div class="provider__box provider--sidebar clearfix">
+        <header class="provider__sidebar--header">
+          <h3>Popularni pożyczkodawcy</h3>
+        </header>
+
+        <ul class="provider__popular__list">
+          <% templateData.popularProviders.forEach(function(popularProvider) { %>
+            <li class="provider__popular__list__item">
+              <a title="<%= popularProvider.title %>" href="/provider/<%= popularProvider.name %>">
+              <%= popularProvider.title %>
+              </a>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+
+    </aside>
   </div>
-  <h3 class="bs-header-detail clearfix">Wyraź swoją opinię</h3>
-<div id="disqus_thread"></div>
+</section>
+
+
+
 <script>
 (function() {
 var d = document, s = d.createElement('script');
@@ -63,4 +83,3 @@ s.setAttribute('data-timestamp', +new Date());
 (d.head || d.body).appendChild(s);
 })();
 </script>
-</section>

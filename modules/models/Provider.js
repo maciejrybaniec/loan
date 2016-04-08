@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var ProviderSchema = new Schema({
   name: String,
+  title: String,
   description: String,
   loanReceiveTime: String,
   extendPaidTime: String,

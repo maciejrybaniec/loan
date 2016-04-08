@@ -1,0 +1,56 @@
+<div class="provider__box">
+  <header class="provider__details__header row">
+    <h3>Co musisz wiedzieć</h3>
+  </header>
+  <div class="bs-provider-details-table">
+    <div class="bs-provider-details-cell">
+      <i class="details-sprite bs-icon-05"></i>
+      <h6>Przelew środków na twoje konto</h6>
+      <p><%= templateData.provider.loanReceiveTime %></p>
+    </div>
+  </div>
+
+<div class="bs-provider-details-table">
+  <div class="bs-provider-details-cell">
+    <i class="details-sprite bs-icon-06"></i>
+    <h6>czas rozpatrywania wniosku</h6>
+    <p><%= templateData.provider.providerLoanGiveTime %></p>
+  </div>
+</div>
+
+<div class="bs-provider-details-table">
+  <div class="bs-provider-details-cell">
+    <i class="details-sprite bs-icon-09"></i>
+    <h6>Co się dzieje gdy nie spłacasz?</h6>
+    <p><%= templateData.provider.tardinessCost %></p>
+  </div>
+</div>
+
+<div class="bs-provider-details-table">
+  <div class="bs-provider-details-cell">
+    <i class="details-sprite bs-icon-08"></i>
+    <h6>Wydłużenie spłaty</h6>
+    <p><%= templateData.provider.extendPaidTime %></p>
+  </div>
+</div>
+
+<div class="bs-provider-details-table">
+  <div class="bs-provider-details-cell">
+    <i class="details-sprite bs-icon-04"></i>
+    <h6>Telefon kontaktowy</h6>
+    <p><%= templateData.provider.providerTelephone %></p>
+  </div>
+</div>
+
+<div class="bs-provider-details-table">
+  <div class="bs-provider-details-cell">
+    <i class="details-sprite bs-icon-07"></i>
+    <h6>Weryfikowane bazy</h6>
+    <p class="bs-comma-separate">
+      <% templateData.provider.providerDatabases.forEach(function(database) { %>
+      <span><%= database %></span>
+      <% }); %>
+    </p>
+  </div>
+</div>
+</div>

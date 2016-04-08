@@ -1,0 +1,31 @@
+<div class="provider__box provider__details">
+    <header class="provider__details__header row">
+      <h3><%= templateData.provider.title %> - pzykładowe pożyczki</h3>
+    </header>
+  <ul class="provider__loans">
+  <% templateData.loans.forEach(function(loan) { %>
+    <li class="provider__loans__item clearfix">
+      <div class="col-xs-12 col-sm-8 col-md-9">
+      <div class="row">
+      <div class="col-xs-4 col-sm-4 bs-amount-value">
+        <h6 class="provider__loans__item--label">pożyczana kwota</h6>
+        <p class="bs-provider-value"><%= loan.amount %> zł</p>
+      </div>
+      <div class="col-xs-4 col-sm-4 bs-rrso-value">
+        <h6 class="provider__loans__item--label">rrso</h6>
+        <p class="bs-provider-value"><%= loan.rrso %> %</p>
+      </div>
+      <div class="col-xs-4 col-sm-4 bs-comprasion-value">
+        <h6 class="provider__loans__item--label">prowizja</h6>
+        <p class="bs-provider-value"><%= loan.commission %> zł</p>
+      </div>
+      </div>
+
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3">
+        <a class="bs-button-orange-small" href="/redirect/<%= loan.provider %>" target="_blank" title="Złóż wniosek">Złóż wniosek</a>
+      </div>
+    </li>
+  <% }); %>
+  </ul>
+</div>

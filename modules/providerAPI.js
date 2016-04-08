@@ -23,4 +23,25 @@ module.exports = {
     });
     return defer.promise;
   },
+  /**
+   * Get popular providers based on rating
+   * @method getPopularProviders
+   * @return {object} promise object
+   */
+  getPopularProviders() {
+    var $this = this;
+    var defer = q.defer();
+
+    Provider.find({}, null, { sort: {rating: -1}, limit: 7 },
+    function(err, docs) {
+      console.log(docs);
+
+      if (err || docs === null) {
+        return defer.reject();
+      }
+
+      defer.resolve(docs);
+    });
+    return defer.promise;
+  }
 };

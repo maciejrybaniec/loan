@@ -11,6 +11,7 @@ var Notification = require('./modules/notification');
 var viewMainTemplate = config.mainTemplate;
 
 var providerAPI = require('./modules/providerAPI');
+var LoanAPI = require('./modules/api/LoanAPI');
 
 /* Connect to MongoDB */
 var databaseConnection = mongoose.connect(config.mongodb);
@@ -33,17 +34,31 @@ router.get('/', function(req, res) {
 
 router.get('/provider/:provider', function(req, res) {
   var promise = providerAPI.getProviderDetails(req.params.provider);
+  var $provider = undefined;
+  var $popularProviders = undefined;
+
+
+
   promise
     .then(function(provider) {
-      console.log(provider);
+      $provider = provider;
+      return providerAPI.getPopularProviders();
+    })
+    .then(function(popularProviders) {
+      $popularProviders = popularProviders;
+      return LoanAPI.getRandomLoans(req.params.provider);
+    })
+    .then(function(loans) {
       return res.render('index', {
         'template': 'provider' + viewMainTemplate,
         'headSectionData': config.views.provider,
         'templateData': {
-          'provider': provider,
+          'provider': $provider,
+          'popularProviders': $popularProviders,
+          'loans': loans
         },
       });
-    });
+    })
 });
 
 
@@ -55,10 +70,18 @@ router.get('/contact', function(req, res) {
   });
 });
 
-router.get('/conditions', function(req, res) {
+router.get('/regulamin', function(req, res) {
   return res.render('index', {
     'template': 'conditions' + viewMainTemplate,
     'headSectionData': config.views.conditions,
+    'templateData': {},
+  });
+});
+
+router.get('/o-nas', function(req, res) {
+  return res.render('index', {
+    'template': 'about' + viewMainTemplate,
+    'headSectionData': config.views.about,
     'templateData': {},
   });
 });

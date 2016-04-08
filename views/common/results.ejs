@@ -13,13 +13,13 @@
   </header>
 
   <div class="clearfix" ng-if="showDetailsNotification">
-    <div ng-include="'lib/templates/loan-notification.html'"></div>
+    <div ng-include="'assets/templates/loan-notification.html'"></div>
   </div>
 
   <div class="bs-empty-results text-center col-xs-10 col-xs-offset-1" ng-if="loanProviders.length === 0">
     Niestety nie znaleźlśmy ofert spełniających kryteria wyszukiwania. Być może zainteresują Cię nasze poniżej przygotowane oferty.
   </div>
   <ul class="list-unstyled bs-compare-results" ng-if="loanProviders">
-    <div ng-include="'lib/templates/provider-element.html'"></div>
+    <div ng-include="'assets/templates/provider-element.html'"></div>
   </ul>
 </section>
